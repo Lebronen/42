@@ -7,5 +7,5 @@ int	ft_string_is_lowercase(char *str)
 			return (0);
 		str ++;
 	}
-	return (0);
+	return (1);
 }
