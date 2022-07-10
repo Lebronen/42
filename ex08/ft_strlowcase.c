@@ -1,5 +1,5 @@
 
-char	ft_strlowcase(char *str)
+char	*ft_strlowcase(char *str)
 {
 	char *str2;
 
