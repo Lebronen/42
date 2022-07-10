@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <string.h>
 
 int	ft_char_is_alpha(char c)
 {
@@ -46,12 +44,4 @@ char	*ft_strcapitalize(char *str)
 		s ++;
 	}
 	return (str);
-}
-int main()
-{
-	char str[100];
-	strcpy(str, "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un");
-	char *str2 = ft_strcapitalize(str);
-	puts(str2);
-	return (0);
 }
