@@ -14,11 +14,6 @@
 #include <stdlib.h>
 #include "ftr.h"
 
-t_larousse	**dict_alloc(void)
-{
-	return (malloc(sizeof(t_larousse)));
-}
-
 void	dict_desalloc(t_larousse *dict)
 {
 	t_larousse	*ptr;
@@ -44,7 +39,7 @@ char	*get_item(t_larousse *dict, char *key)
 	return NULL;
 }
 
-void	dict_add_item(t_larousse **dict, char *key, char *value)
+t_larousse *dict_add_item(t_larousse *dict, char *key, char *value)
 {
 	t_larousse	*d;
 
@@ -53,7 +48,8 @@ void	dict_add_item(t_larousse **dict, char *key, char *value)
 	ft_strcpy(d->key, key);
 	d->value = malloc(ft_strlen(value)+1);
 	ft_strcpy(d->value, value);
-	*dict = d;
+	d->next = dict;
+	return d;
 }
 
 void	print_list(t_larousse *dict, int size)
@@ -68,16 +64,15 @@ void	print_list(t_larousse *dict, int size)
 	}
 }
 
-t_larousse	**ft_dico(char **keys, char **values, int size)
+t_larousse	*ft_dico(char **keys, char **values, int size)
 {
-	t_larousse	**dict;
+	t_larousse	*dict = 0;
 	int		i;
 
-	dict = dict_alloc();
 	i = 0;
 	while (i < size)
 	{
-		dict_add_item(dict, keys[i], values[i]);
+		dict = dict_add_item(dict, keys[i], values[i]);
 		i++;
 	}
 	return (dict);
