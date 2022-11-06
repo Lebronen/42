@@ -6,14 +6,13 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 19:58:53 by rshay             #+#    #+#             */
-/*   Updated: 2022/10/28 00:20:51 by rshay            ###   ########.fr       */
+/*   Updated: 2022/11/03 16:58:07 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 
