@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:56:01 by rshay             #+#    #+#             */
-/*   Updated: 2022/09/02 16:58:12 by rshay            ###   ########.fr       */
+/*   Updated: 2022/11/07 17:45:56 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ char	*ft_strrchr(const char *s, int c)
 
 	i = 0;
 	max = -1;
-	while (s[i])
+	while ((unsigned char)s[i])
 	{
-		if (s[i] == c)
+		if ((unsigned char)s[i] == (unsigned char)c)
 			max = i;
 		i++;
 	}
+	if ((unsigned char)s[i] == (unsigned char)c)
+		max = i;
 	if (max == -1)
 		return (NULL);
 	s += max;

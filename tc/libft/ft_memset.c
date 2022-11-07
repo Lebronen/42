@@ -6,11 +6,11 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 22:01:33 by rshay             #+#    #+#             */
-/*   Updated: 2022/08/30 22:03:40 by rshay            ###   ########.fr       */
+/*   Updated: 2022/11/07 10:47:49 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memset( void *pointer, int value, size_t count )
 {
