@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:54:51 by rshay             #+#    #+#             */
-/*   Updated: 2022/09/02 19:51:38 by rshay            ###   ########.fr       */
+/*   Updated: 2022/11/08 13:33:41 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = ft_strlen((char *)s1) - 1;
 	while (ft_instr(s1[j], set) && j)
 		j--;
-	s2 = (char *)malloc((j - i) * sizeof(char));
+	s2 = (char *)malloc((j - i + 1) * sizeof(char));
 	k = 0;
 	while (i <= j)
 	{

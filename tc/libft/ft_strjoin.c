@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:29:26 by rshay             #+#    #+#             */
-/*   Updated: 2022/09/02 18:52:29 by rshay            ###   ########.fr       */
+/*   Updated: 2022/11/08 13:28:53 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	a = ft_strlen((char *)s1);
 	b = ft_strlen((char *)s2);
-	s3 = (char *)malloc((a + b) * sizeof(char));
+	s3 = (char *)malloc((a + b) * sizeof(char) + 1);
 	if (!s3)
 		return (NULL);
 	i = 0;
