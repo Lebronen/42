@@ -12,27 +12,35 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char    *get_next_line(int fd)
 {
-	char		*buffer;
-	char		*res;
-	size_t		n;
-	static char	*s;
+        char            *buffer;
+        static char     temp[150];
+        static int      ind = 0;
+        char            *str;
 
-	if (!fd)
-			return (NULL);
-	buffer = malloc(BUFFER_SIZE * sizeof(char) + 1);
-	if (!buffer)
-			return (NULL);
-	n = read(fd, buffer, BUFFER_SIZE);
-	if (!n)
-			return (NULL);
-	res = malloc(ft_line_size(buffer) * sizeof(char) + 1);
-	s = malloc((ft_strlen(buffer) - ft_line_size(buffer)) * sizeof(char) + 1);
-	if (!res || !s)
-			return (NULL);
-	ft_strncpy(buffer, res, (size_t)ft_line_size(buffer));
-	ft_strncpy(buffer + ft_line_size(buffer), s, ft_strlen(buffer) - ft_line_size(buffer));
-	free(buffer);
-	return (res);
+        if (fd < 0 || BUFFER_SIZE <= 0 || ind == -1)
+                return (NULL);
+        buffer = (char *)malloc(BUFFER_SIZE * sizeof(char));
+        if (!buffer)
+                return (NULL);
+        if (ind == 0)
+                temp[0] = '\0';
+        while (!in_str(temp, '\n') && read(fd, buffer, BUFFER_SIZE))
+        {
+                ft_strncat(temp, buffer, BUFFER_SIZE);
+        }
+        if (!in_str(temp, '\n'))
+                ind = -1;
+        else
+                ind++;
+        str = malloc(ft_line_size(temp) * sizeof(char) + 1);
+        if (!str)
+                return (NULL);
+
+        str = ft_strncpy(str, temp, ft_line_size(temp));
+        ft_clear(temp);
+        free(buffer);
+        return (str);
 }
+
