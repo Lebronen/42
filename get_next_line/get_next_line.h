@@ -12,12 +12,23 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
-int		ft_line_size(char *s);
-char	*ft_strncpy(char *dest, const char *src, size_t n);
-int		ft_strlen(char *s);
+typedef struct s_list
+{
+        void                    *content;
+        struct s_list   *next;
+}                               t_list;
+
+char    *get_next_line(int fd);
+int             ft_line_size(char *s);
+char    *ft_strncat(char *dest, char *src, int n);
+char    *ft_clear(char *str);
+int             in_str(char *str, char c);
+char    *ft_strncpy(char *dst, char *src, int n);
 
 #endif
