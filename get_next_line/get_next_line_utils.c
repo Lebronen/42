@@ -11,17 +11,33 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-int	ft_strlen(char *s)
+char	*ft_clear(char *str)
 {
+	
 	int	i;
+	int	j;
+	int	x;
 
 	i = 0;
-	while(s[i])
+	j = 0;
+	x = ft_line_size(str);
+	
+	while (str[i])
 	{
 		i++;
 	}
-	return (i);
+	i -= x + 1;
+	while (j < i)
+	{
+		str[j] = str[x + 1];
+		x++;
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+
 }
 
 int	ft_line_size(char	*s)
@@ -33,20 +49,56 @@ int	ft_line_size(char	*s)
 	{
 		i++;
 	}
-	return (i + 1);
+	return (i);
 	
 }
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+char	*ft_strncat(char *dst, char *src, int n)
 {
-	size_t	i;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (i < n && dest[i])
+	j = 0;
+	while (dst[i])
 	{
-		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	while (j < n)
+	{
+		dst[i] = src[j];
+		i++;
+		j++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
+
+int		in_str(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strncpy(char *dst, char *src, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
