@@ -49,6 +49,8 @@ int	ft_line_size(char	*s)
 	{
 		i++;
 	}
+	if (s[i] == '\n')
+		return (i + 1);
 	return (i);
 	
 }

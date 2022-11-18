@@ -15,26 +15,44 @@
 char    *get_next_line(int fd)
 {
         char            *buffer;
-        static char     temp[150];
+        static char     temp[4096];
         static int      ind = 0;
         char            *str;
+        int             i;
 
         if (fd < 0 || BUFFER_SIZE <= 0 || ind == -1)
                 return (NULL);
-        buffer = (char *)malloc(BUFFER_SIZE * sizeof(char));
+        if (read(fd, NULL, 0) < 0)
+                return (NULL);
+        buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
         if (!buffer)
                 return (NULL);
         if (ind == 0)
-                temp[0] = '\0';
+        {
+                i = 0;
+                while (i <= BUFFER_SIZE)
+                {
+                        temp[i] = '\0';
+                        i++;
+                }
+        }
+                
         while (!in_str(temp, '\n') && read(fd, buffer, BUFFER_SIZE))
         {
                 ft_strncat(temp, buffer, BUFFER_SIZE);
         }
         if (!in_str(temp, '\n'))
+        {
                 ind = -1;
+                if (!temp[0])
+                {
+                        free(buffer);
+                        return(NULL);
+                }
+        }
         else
                 ind++;
-        str = malloc(ft_line_size(temp) * sizeof(char) + 1);
+        str = malloc((ft_line_size(temp) + 1) * sizeof(char));
         if (!str)
                 return (NULL);
 

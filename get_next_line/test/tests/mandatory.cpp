@@ -23,7 +23,7 @@ int main(void)
 	title("Invalid fd: ")
 	fd = open("files/empty", O_RDWR);
 	TEST(/* 1 */ gnl(1000,  NULL);
-		 /* 2 */ gnl(-1,  NULL); close(fd);
+		  /*2 */ gnl(-1,  NULL); close(fd);
 		 /* 3 */ gnl(fd,  NULL);) cout << ENDL;
 
 	title("files/empty: ")
