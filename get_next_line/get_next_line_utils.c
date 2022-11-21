@@ -23,15 +23,14 @@ char	*ft_clear(char *str)
 	i = 0;
 	j = 0;
 	x = ft_line_size(str);
-	
 	while (str[i])
 	{
 		i++;
 	}
-	i -= x + 1;
+	i -= x;
 	while (j < i)
 	{
-		str[j] = str[x + 1];
+		str[j] = str[x];
 		x++;
 		j++;
 	}

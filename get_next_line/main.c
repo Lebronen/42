@@ -7,12 +7,13 @@
 
 int main(void)
 {
-    char    str[7];
-    //char    *src = "cc";
+    char    str[3];
     int       fichier;
-    fichier = open("nl", O_RDONLY);
+    fichier = open("fichier.txt", O_RDONLY);
     char    *res = get_next_line(fichier);
     printf("%s", res);
+    //printf("%ld\n", read(fichier, str, 3));
+    //printf("%ld", read(fichier, str, 3));
     close(fichier);
     return (0);
 }
