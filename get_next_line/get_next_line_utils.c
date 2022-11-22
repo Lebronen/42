@@ -3,103 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 14:23:21 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/16 19:15:20 by rshay            ###   ########.fr       */
+/*   Created: 2022/11/22 18:25:25 by rshay             #+#    #+#             */
+/*   Updated: 2022/11/22 18:25:59 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-char	*ft_clear(char *str)
+int	found_newline(t_list *stash)
 {
-	
-	int	i;
-	int	j;
-	int	x;
+	int		i;
+	t_list	*current;
 
+	if (stash == NULL)
+		return (0);
+	current = ft_lst_get_last(stash);
 	i = 0;
-	j = 0;
-	x = ft_line_size(str);
-	while (str[i])
+	while (current->content[i])
 	{
-		i++;
-	}
-	i -= x;
-	while (j < i)
-	{
-		str[j] = str[x];
-		x++;
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
-
-}
-
-int	ft_line_size(char	*s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-	{
-		i++;
-	}
-	if (s[i] == '\n')
-		return (i + 1);
-	return (i);
-	
-}
-
-char	*ft_strncat(char *dst, char *src, int n)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (dst[i])
-	{
-		i++;
-	}
-	while (j < n)
-	{
-		dst[i] = src[j];
-		i++;
-		j++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-
-int		in_str(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
+		if (current->content[i] == '\n')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strncpy(char *dst, char *src, int n)
+t_list	*ft_lst_get_last(t_list *stash)
 {
-	int	i;
+	t_list	*current;
 
-	i = 0;
-	while (i < n && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+	current = stash;
+	while (current && current->next)
+		current = current->next;
+	return (current);
 }
 
+void	generate_line(char **line, t_list *stash)
+{
+	int	i;
+	int	len;
+
+	len = 0;
+	while (stash)
+	{
+		i = 0;
+		while (stash->content[i])
+		{
+			if (stash->content[i] == '\n')
+			{
+				len++;
+				break ;
+			}
+			len++;
+			i++;
+		}
+		stash = stash->next;
+	}
+	*line = malloc(sizeof(char) * (len + 1));
+}
+
+void	free_stash(t_list *stash)
+{
+	t_list	*current;
+	t_list	*next;
+
+	current = stash;
+	while (current)
+	{
+		free(current->content);
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
+
+int	len(const char *str)
+{
+	int	len;
+
+	len = 0;
+	while (*(str++))
+		len++;
+	return (len);
+}
