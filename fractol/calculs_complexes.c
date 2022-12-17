@@ -30,5 +30,5 @@ t_comp prod_comp(t_comp a, t_comp b)
 
 int norme_comp(t_comp z)
 {
-    return sqrt(z.r * z.r + z.i * z.i);
+    return (z.r * z.r + z.i * z.i);
 }
