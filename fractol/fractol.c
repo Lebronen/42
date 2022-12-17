@@ -33,10 +33,10 @@
  33     vars.img = &img;
  34     vars.color = 0;
  35     vars.zoom = 1;
- 36     vars.x_min = -0.25;
- 37     vars.x_max = 0.25;
- 38     vars.y_max = 0.25;
- 39     vars.y_min = -0.25;
+ 36     vars.x_min = -2;
+ 37     vars.x_max = 1;
+ 38     vars.y_max = 1;
+ 39     vars.y_min = -1;
  40     put_fractale(&img, 75, vars);
  41     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
  42     mlx_hook(vars.win, 17, 1L << 0, close, &vars);
