@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:12:12 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/10 22:39:03 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:39:44 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ int	clavier(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 	}
+	else if (keycode == 65361)
+		vars->move_x += 0.1;
+	else if (keycode == 65362)
+		vars->move_y +=  0.1;
+	else if (keycode == 65363)
+		vars->move_x -= 0.1;
+	else if (keycode == 65364)
+		vars->move_y -= 0.1;
+	put_fractale(vars->img, 45 , *vars);
     printf("%d\n", keycode);
     
 	
@@ -36,32 +45,18 @@ int	clavier(int keycode, t_vars *vars)
 
 int	dive(int button, int x, int y, t_vars *vars)
 {
-    
-	if (button == 1)
+	if (button == 4 || button == 5)
 	{
-        double pre_long = vars->x_max - vars->x_min;
-        double longueur = pre_long / 2;
-        double pre_large = vars->y_max - vars->y_max;
-        double largeur = pre_large / 2;
-        vars->x_min = x - longueur / 2;
-        vars->x_max = x + longueur / 2;
-        vars->y_min = y  - largeur / 2;
-        vars->y_max = y + largeur / 2;
-            
+		if (button == 4)
+			vars->zoom *= 1.1;
+		else if (button == 5 && vars->zoom > 0.02)
+			vars->zoom /= 1.1;
+		vars->move_x = (x - W / 2) / (3 * vars->zoom * W) + vars->move_x;
+		vars->move_y = (y - H / 2) / (3 * vars->zoom * H) + vars->move_y;
+		(void)x;
+		(void)y;
 	}
-	else if (button == 3)
-	{
-		double pre_long = vars->x_max - vars->x_min;
-        double longueur = pre_long * 2;
-        double pre_large = vars->y_max - vars->y_max;
-        double largeur = pre_large * 2;
-        vars->x_min = x - longueur * 2;
-        vars->x_max = x + longueur * 2;
-        vars->y_min = y  - largeur * 2;
-        vars->y_max = y + largeur * 2;
-	}
-		put_fractale(vars->img, 75 , *vars);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0 );
+	put_fractale(vars->img, 45 , *vars);
 	
 	printf("%d\n", button);
 	return (0);
