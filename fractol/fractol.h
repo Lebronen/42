@@ -6,59 +6,66 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:27:26 by lebronen          #+#    #+#             */
-/*   Updated: 2022/12/11 15:20:19 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/12 00:53:10 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #ifndef FRACTOL_H
- 14 # define FRACTOL_H
- 15 
- 16 # include <math.h>
- 17 
- 18 # ifndef W
- 19 # define W 1920
- 20 # endif
- 21 
- 22 # ifndef H
- 23 # define H 1080
- 24 # endif
- 25 
- 26 typedef struct s_data
- 27 {
- 28     void    *img;
- 29     char    *addr;
- 30     int     bpp;
- 31     int     line_l;
- 32     int     endian;
- 33 }       t_data;
- 34 
- 35 typedef struct s_comp
- 36 {
- 37     double      r;
- 38     double      i;
- 39 }       t_comp;
- 40 
- 41 typedef struct s_vars
- 42 {
- 43     void    *mlx;
- 44     void    *win;
- 45     t_data  *img;
- 46     int     color;
- 47     double  zoom;
- 48     double  x_min;
- 49     double  x_max;
- 50     double  y_min;
- 51     double  y_max;
- 52 }       t_vars;
- 53 
- 54 t_comp  add_comp(t_comp a, t_comp b);
- 55 t_comp  prod_comp(t_comp a, t_comp b);
- 56 int     norme_comp(t_comp z);
- 57 t_comp  coord_to_comp(int x, int y, t_vars vars);
- 58 void    put_fractale(t_data *img, int max, t_vars vars);
- 59 int     mandelbrot(t_comp c, int max);
- 60 int     close(t_vars *vars);
- 61 int     clavier(int keycode, t_vars *vars);
- 62 int     dive(int button, int x, int y, t_vars *vars);
- 63 
- 64 #endif
+#ifndef FRACTOL_H
+# define FRACTOL_H
+
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+
+# ifndef W
+#  define W 500
+# endif
+
+# ifndef H
+#  define H 500
+# endif
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_l;
+	int		endian;
+}			t_data;
+
+typedef struct s_comp
+{
+	double	r;
+	double	i;
+}		t_comp;
+
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+	t_data	*img;
+	int		color;
+	double	zoom;
+	double	px;
+	double	py;
+	double	move_x;
+	double	move_y;
+	char	d;
+}			t_vars;
+
+t_comp	add_comp(t_comp a, t_comp b);
+t_comp	prod_comp(t_comp a, t_comp b);
+int		norme_comp(t_comp z);
+t_comp	coord_to_comp(int x, int y, t_vars vars);
+void	put_fractale(t_data *img, int max, t_vars vars);
+int		fractale(t_comp c, t_comp z, int max);
+int		close(t_vars *vars);
+int		clavier(int keycode, t_vars *vars);
+int		dive(int button, int x, int y, t_vars *vars);
+int		str_comp(char *s1, char *s2);
+double	ft_atoi(char *s);
+double	atoi_dec(double nb, int neg, char *s);
+double	pow_ten(double x, int i);
+
+#endif
