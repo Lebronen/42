@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:12:12 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/11 17:39:44 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/12 01:12:39 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ int	clavier(int keycode, t_vars *vars)
 	else if (keycode == 65361)
 		vars->move_x += 0.1;
 	else if (keycode == 65362)
-		vars->move_y +=  0.1;
+		vars->move_y += 0.1;
 	else if (keycode == 65363)
 		vars->move_x -= 0.1;
 	else if (keycode == 65364)
 		vars->move_y -= 0.1;
-	put_fractale(vars->img, 45 , *vars);
-    printf("%d\n", keycode);
-    
-	
+	put_fractale(vars->img, 45, *vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 	return (0);
 }
 
@@ -56,8 +54,7 @@ int	dive(int button, int x, int y, t_vars *vars)
 		(void)x;
 		(void)y;
 	}
-	put_fractale(vars->img, 45 , *vars);
-	
-	printf("%d\n", button);
+	put_fractale(vars->img, 45, *vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 	return (0);
 }
