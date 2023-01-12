@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:12:12 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/12 01:12:39 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:44:47 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "mlx.h"
+#include "include/mlx.h"
 #include <stdio.h>
 
 int	close(t_vars *vars)
@@ -23,6 +23,8 @@ int	close(t_vars *vars)
 
 int	clavier(int keycode, t_vars *vars)
 {
+	t_comp	c;
+
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -36,13 +38,17 @@ int	clavier(int keycode, t_vars *vars)
 		vars->move_x -= 0.1;
 	else if (keycode == 65364)
 		vars->move_y -= 0.1;
-	put_fractale(vars->img, 45, *vars);
+	c.r = vars->px;
+	c.i = vars->py;
+	put_fractale(*vars, c, 0, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 	return (0);
 }
 
 int	dive(int button, int x, int y, t_vars *vars)
 {
+	t_comp	c;
+
 	if (button == 4 || button == 5)
 	{
 		if (button == 4)
@@ -54,7 +60,9 @@ int	dive(int button, int x, int y, t_vars *vars)
 		(void)x;
 		(void)y;
 	}
-	put_fractale(vars->img, 45, *vars);
+	c.r = vars->px;
+	c.i = vars->py;
+	put_fractale(*vars, c, 0, 0);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 	return (0);
 }
