@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:15:58 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/12 00:32:03 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/15 22:13:27 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ double	ft_atoi(char *s)
 		nb *= 10;
 		nb += s[i] - 48;
 		i++;
-		printf("%f\n", nb);
 	}
 	if (!s[i])
 		return (neg * nb);

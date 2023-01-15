@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:29:23 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/12 18:45:13 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/14 13:01:28 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "include/mlx.h"
+#include "mlx.h"
 
 void	init(t_vars *vars, t_data *img)
 {
@@ -44,7 +44,7 @@ void	loop(t_vars *vars, t_data *img)
 
 void	set_c_and_z(t_comp *c, t_comp *z, t_vars vars, t_coord p)
 {
-	if (vars.d == 'm')
+	if (vars.d == 'm' || vars.d == 'b')
 	{
 		*c = coord_to_comp(p.x, p.y, vars);
 		z->r = 0;
@@ -54,4 +54,26 @@ void	set_c_and_z(t_comp *c, t_comp *z, t_vars vars, t_coord p)
 	{
 		*z = coord_to_comp(p.x, p.y, vars);
 	}
+}
+
+int	verif_params(int argc, char **argv, t_vars *vars)
+{
+	if (str_comp(argv[1], "mandelbrot") || str_comp(argv[1], "burning_ship"))
+	{
+		if (argc != 2)
+			return (1);
+		if (str_comp(argv[1], "mandelbrot"))
+			vars->d = 'm';
+		else
+			vars->d = 'b';
+	}
+	else if (str_comp(argv[1], "julia"))
+	{
+		if (argc != 4)
+			return (1);
+		vars->px = ft_atoi(argv[2]);
+		vars->py = ft_atoi(argv[3]);
+		vars->d = 'j';
+	}
+	return (0);
 }

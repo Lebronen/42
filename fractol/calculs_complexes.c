@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:50:41 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/12 00:24:49 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/14 13:06:18 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,11 @@ t_comp	prod_comp(t_comp a, t_comp b)
 int	norme_comp(t_comp z)
 {
 	return (z.r * z.r + z.i * z.i);
+}
+
+double	absolue(double x)
+{
+	if (x < 0)
+		return (-1 * x);
+	return (x);
 }

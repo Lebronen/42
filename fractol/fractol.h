@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:27:26 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/12 18:42:35 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/15 22:13:40 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FRACTOL_H
 
 # include <math.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 # ifndef W
@@ -61,12 +60,14 @@ typedef struct s_coord
 	int	y;
 }		t_coord;
 
+void	ft_putchar(char c);
+void	ft_putstr(char *s);
 t_comp	add_comp(t_comp a, t_comp b);
 t_comp	prod_comp(t_comp a, t_comp b);
 int		norme_comp(t_comp z);
 t_comp	coord_to_comp(int x, int y, t_vars vars);
 void	put_fractale(t_vars vars, t_comp c, int x, int y);
-int		fractale(t_comp c, t_comp z, int max);
+int		fractale(t_comp c, t_comp z, int max, t_vars vars);
 int		close(t_vars *vars);
 int		clavier(int keycode, t_vars *vars);
 int		dive(int button, int x, int y, t_vars *vars);
@@ -77,5 +78,7 @@ double	pow_ten(double x, int i);
 void	init(t_vars *vars, t_data *img);
 void	loop(t_vars *vars, t_data *img);
 void	set_c_and_z(t_comp *c, t_comp *z, t_vars vars, t_coord p);
+int		verif_params(int argc, char **argv, t_vars *vars);
+double	absolue(double x);
 
 #endif

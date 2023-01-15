@@ -1,4 +1,4 @@
-SRC = fractol.c calculs_complexes.c events.c utils.c
+SRC = fractol.c calculs_complexes.c events.c utils.c init.c affiche.c
 
 OBJ = $(SRC:.c=.o)
 
