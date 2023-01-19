@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:12:12 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/14 11:53:27 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:11:26 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	dive(int button, int x, int y, t_vars *vars)
 		(void)x;
 		(void)y;
 	}
+	else if (button == 1)
+		vars->x *= 16;
 	c.r = vars->px;
 	c.i = vars->py;
 	put_fractale(*vars, c, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:27:26 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/15 22:13:40 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:07:47 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_vars
 	double	move_y;
 	char	d;
 	int		max;
+	int		c;
+	int		x;
 }			t_vars;
 
 typedef struct s_coord
