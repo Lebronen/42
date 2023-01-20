@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:22:09 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/19 22:48:51 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/20 09:07:17 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	put_fractale(t_vars vars, t_comp c, int x, int y)
 			set_c_and_z(&c, &z, vars, p);
 			i = fractale(c, z, vars.max, vars);
 			if (i != vars.max)
-				my_mlx_pixel_put(vars.img, x, y, (i * vars.c) /*% 0xFFFFFFFF*/);
+				my_mlx_pixel_put(vars.img, x, y, (i * vars.c) % 0xFFFFFFFF);
 			else
 				my_mlx_pixel_put(vars.img, x, y, 0x00000000);
 			y++;
