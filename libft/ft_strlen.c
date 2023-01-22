@@ -6,13 +6,13 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:47:55 by rshay             #+#    #+#             */
-/*   Updated: 2022/09/02 16:48:56 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/20 20:53:34 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 

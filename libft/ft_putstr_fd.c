@@ -6,11 +6,11 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 15:31:53 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/14 14:17:52 by rshay            ###   ########.fr       */
+/*   Updated: 2023/01/20 20:56:50 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
