@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 20:08:59 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/20 21:18:50 by lebronen         ###   ########.fr       */
+/*   Created: 2023/01/31 11:01:31 by rshay             #+#    #+#             */
+/*   Updated: 2023/01/31 11:02:34 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,20 @@
 
 typedef struct s_swap
 {
-    int *t;
+    int *a;
+    int *b;
+    int len_a;
+    int len_b;
 }       t_swap;
 
-int bien_forme(char ** a, int x, t_swap *stack);
-int in_tab(int *t, int x);
-int is_nbr(char *s);
-
+int     bien_forme(char ** a, int x, t_swap *stack);
+int     in_tab(int *t, int x);
+int     is_nbr(char *s);
+void    aff_tab(int *t);
+void    swap_a(t_swap *stack);
+void    swap_b(t_swap *stack);
+void    swap_ab(t_swap *stack);
+void    push_a(t_swap *stack);
+void    push_b(t_swap *stack);
 
 #endif
