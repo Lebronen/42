@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:12:12 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/20 19:51:23 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:28:04 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	clavier(int keycode, t_vars *vars)
 		mlx_loop_end(vars->mlx);
 	}
 	else if (keycode == 65361)
-		vars->move_x += 0.1;
+		vars->move_x += 1 / vars->zoom;
 	else if (keycode == 65362)
-		vars->move_y += 0.1;
+		vars->move_y += 0.1 / vars->zoom;
 	else if (keycode == 65363)
 		vars->move_x -= 0.1;
 	else if (keycode == 65364)
@@ -58,9 +58,9 @@ int	dive(int button, int x, int y, t_vars *vars)
 		(void)y;
 	}
 	else if (button == 1)
-		vars->c += 0x72618414;
+		vars->c += 0x18BCDAFA;
 	else if (button == 3)
-		vars->c -= 0x72618414;
+		vars->c -= 0x18BCDAFA;
 	c.r = vars->px;
 	c.i = vars->py;
 	put_fractale(*vars, c, 0, 0);

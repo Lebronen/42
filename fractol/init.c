@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:29:23 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/21 00:10:42 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:34:14 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init(t_vars *vars, t_data *img)
 	vars->zoom = 0.5;
 	vars->move_x = 0;
 	vars->move_y = 0;
-	vars->max = 75;
+	vars->max = 50;
 	vars->x = 1;
 	r = 255 * (1 - cos(2 * M_PI / log(2)) / 2);
 	g = 255 * (1 - cos((2 * M_PI) / (3 * sqrt(2) * log(2))) / 2);
