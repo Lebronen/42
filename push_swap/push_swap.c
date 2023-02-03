@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 09:25:06 by lebronen          #+#    #+#             */
-/*   Updated: 2023/02/03 16:03:32 by rshay            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:25:02 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,18 @@ int main(int argc, char **argv)
         free(stack.b);
         return (0);
     }
+    
     aff_tab(stack.a);
+    push_b(&stack);
     //swap_a(&stack);
-    //aff_tab(stack.a);
+    aff_tab(stack.a);
+    aff_tab(stack.b);
+    push_b(&stack);
+    aff_tab(stack.a);
+    aff_tab(stack.b);
+    push_a(&stack);
+    aff_tab(stack.a);
+    aff_tab(stack.b);
 }
 
 int bien_forme(char ** a, int x, t_swap *stack)
@@ -36,7 +45,7 @@ int bien_forme(char ** a, int x, t_swap *stack)
     i = 1;
     stack->a = malloc(sizeof(int) * x);
     stack->b = malloc(sizeof(int) * x);
-    stack->len_a = x;
+    stack->len_a = x - 1;
     stack->len_b = 0;
     while (i < x)
     {
@@ -81,6 +90,8 @@ int is_nbr(char *s)
 void    aff_tab(int *t)
 {
     int i;
+
+    i = 0;
 
     while (t[i])
     {

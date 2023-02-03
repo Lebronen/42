@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:18:12 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/23 17:39:09 by rshay            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:19:39 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ void    swap_a(t_swap *stack)
     temp = (stack->a)[0];
     ft_printf("temp = %d\n", temp);
     (stack->a)[0] = (stack->a)[1];
-    ft_printf("temp = %d\n", temp);
+    ft_printf("a[0] = %d\n", stack->a[0]);
     (stack->a)[1] = temp;
+    ft_printf("a[0] = %d\n", stack->a[0]);
+    ft_printf("a[1] = %d\n", stack->a[1]);
+    ft_printf("a[2] = %d\n", stack->a[2]);
+    
 }
 
 void    swap_b(t_swap *stack)

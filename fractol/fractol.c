@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:22:09 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/20 09:07:17 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:57:56 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "include/mlx.h"
 #include "fractol.h"
 #include <stdlib.h>
 

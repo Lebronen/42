@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 20:08:59 by lebronen          #+#    #+#             */
-/*   Updated: 2023/01/23 17:06:44 by rshay            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:40:45 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 typedef struct s_swap
 {

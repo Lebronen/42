@@ -6,7 +6,7 @@
 /*   By: rshay <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:18:36 by rshay             #+#    #+#             */
-/*   Updated: 2023/01/20 21:04:49 by rshay            ###   ########.fr       */
+/*   Updated: 2022/11/16 11:09:53 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			*ft_memmove(void *dst, const void *src, size_t len);
 
 void			*ft_memset(void *b, int c, size_t len);
 
-int				ft_putchar_fd(char c, int fd);
+void			ft_putchar_fd(char c, int fd);
 
 void			ft_putendl_fd(char *s, int fd);
 
@@ -73,7 +73,7 @@ void			ft_putaddr(size_t n, char *base);
 
 void			ft_putstr_fd(char *s, int fd);
 
-void			ft_putnbr_base(unsigned int n, char *base);
+void				ft_putnbr_base(int n, char *base);
 
 char			**ft_split(char const *s, char c);
 
