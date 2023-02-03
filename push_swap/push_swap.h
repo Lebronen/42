@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 20:08:59 by lebronen          #+#    #+#             */
-/*   Updated: 2023/02/03 16:40:45 by rshay            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:49:04 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void    swap_b(t_swap *stack);
 void    swap_ab(t_swap *stack);
 void    push_a(t_swap *stack);
 void    push_b(t_swap *stack);
+void    rotate_a(t_swap *stack);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 09:25:06 by lebronen          #+#    #+#             */
-/*   Updated: 2023/02/03 17:25:02 by rshay            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:47:45 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,8 @@ int main(int argc, char **argv)
     }
     
     aff_tab(stack.a);
-    push_b(&stack);
-    //swap_a(&stack);
+    rotate_a(&stack);
     aff_tab(stack.a);
-    aff_tab(stack.b);
-    push_b(&stack);
-    aff_tab(stack.a);
-    aff_tab(stack.b);
-    push_a(&stack);
-    aff_tab(stack.a);
-    aff_tab(stack.b);
 }
 
 int bien_forme(char ** a, int x, t_swap *stack)
