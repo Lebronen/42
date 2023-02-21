@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 09:25:06 by lebronen          #+#    #+#             */
-/*   Updated: 2023/02/10 16:51:01 by rshay            ###   ########.fr       */
+/*   Updated: 2023/02/21 14:38:47 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,27 @@ int	main(int argc, char **argv)
 		free(stack.b);
 		return (0);
 	}
-	rotate_a(&stack);
+	algo(&stack);
+	free(stack.a);
+	free(stack.b);
 	return (0);
 }
 
 int	bien_forme(char **a, int x, t_swap *stack)
 {
 	int	i;
+	int	j;
 
 	i = 1;
+	j = 0;
 	stack->a = malloc(sizeof(int) * x);
 	stack->b = malloc(sizeof(int) * x);
+	while (j < x)
+	{
+		stack->a[j] = 0;
+		stack->b[j] = 0;
+		j++;
+	}
 	stack->len_a = x - 1;
 	stack->len_b = 0;
 	while (i < x)
@@ -77,12 +87,12 @@ int	is_nbr(char *s)
 	return (1);
 }
 
-void	aff_tab(int *t)
+void	aff_tab(int *t, int size)
 {
 	int	i;
 
 	i = 0;
-	while (t[i])
+	while (i < size)
 	{
 		ft_printf("%d ", t[i]);
 		i++;
