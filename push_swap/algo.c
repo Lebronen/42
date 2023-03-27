@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:04:58 by rshay             #+#    #+#             */
-/*   Updated: 2023/03/26 20:16:33 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:33:22 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ void	algo(t_swap *stack)
 	}
 	if (stack->len_a <= 5)
 		small_sort(stack);
-	else if (stack->len_a != 100)
+	else if (stack->len_a != 500)
 		sort(stack);
-	else
-		big_sort(stack);
 }
 
 int	is_sort(t_swap stack)
@@ -93,21 +91,27 @@ void	sort(t_swap *stack)
 {
 	int	i;
 	int	j;
+	int	x;
 	int	sens;
 
 	while (stack->len_a)
 	{
 		i = min_ind(stack, 0);
 		j = min_ind(stack, 1);
+		ft_printf("i = %d, j = %d\n", i, j);
+		x = min(i - 1, stack->len_a - i + 1);
+		j = min(j - 1, stack->len_a - j + 1);
+		ft_printf("i = %d, j = %d\n", i, j);
 		sens = 0;
-		if (min(i - 1, stack->len_a - i) > min(j - 1, stack->len_a - j))
+		if (x < j)
 			sens = 1;
 		if (sens)
 		{
-			move_up(stack, j);
+			move_up(stack, i);
 			push_b(stack);
 		}
 		ft_iter(stack, sens);
+		aff_tab(stack->a, stack->len_a);
 	}
 	while (stack->len_b)
 	{

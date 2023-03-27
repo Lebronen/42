@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:10:15 by rshay             #+#    #+#             */
-/*   Updated: 2023/03/25 16:16:22 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:24:31 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ void	move_up(t_swap *stack, int i)
 	int	x;
 	int	sens;
 
-	x = stack->a[i];
+	ft_printf("i = %d\n", i);
 	if (stack->len_a - i < i)
 		sens = 1;
 	else
 		sens = 0;
+	x = stack->a[i];
 	while (stack->a[0] != x)
 	{
 		if (sens)
@@ -76,10 +77,7 @@ void	move_up(t_swap *stack, int i)
 
 void	ft_iter(t_swap *stack, int sens)
 {
-	int	i;
-
-	i = min_ind(stack, 0);
-	move_up(stack, i);
+	move_up(stack, min_ind(stack, 1));
 	push_b(stack);
 	if (sens)
 		swap_b(stack);

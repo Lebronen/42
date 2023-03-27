@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 09:25:06 by lebronen          #+#    #+#             */
-/*   Updated: 2023/03/26 21:35:20 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:04:07 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	main(int argc, char **argv)
 		free(stack.b);
 		return (0);
 	}
+	aff_tab(stack.a, stack.len_a);
 	algo(&stack);
+	aff_tab(stack.a, stack.len_a);
 	free(stack.a);
 	free(stack.b);
 	return (0);
