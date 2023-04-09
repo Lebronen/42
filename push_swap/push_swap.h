@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 20:08:59 by lebronen          #+#    #+#             */
-/*   Updated: 2023/03/27 16:57:56 by rshay            ###   ########.fr       */
+/*   Updated: 2023/04/09 22:35:48 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_swap
 int		bien_forme(char **a, int x, t_swap *stack);
 int		in_tab(int *t, int x);
 int		is_nbr(char *s);
+int		ft_len(char **s);
+void	free_tab(char **s);
 void	aff_tab(int *t, int size);
 void	swap_a(t_swap *stack);
 void	swap_b(t_swap *stack);
@@ -51,16 +53,22 @@ void	insert(t_swap *stack);
 int		bin(int x);
 void	case_three(t_swap *stack);
 int		min_ind(t_swap *stack, int x);
+int 	max_element(t_swap *stack, int x);
+int 	max_tab(t_swap *stack);
 void	move_up(t_swap *stack, int i);
 int 	max(int x, int y);
 int		min(int x, int y);
 void	sort(t_swap *stack);
 void	ft_iter(t_swap *stack, int sens);
-int	loop_min(t_swap *stack, int min_1, int min_2, int x);
+int		loop_min(t_swap *stack, int min_1, int min_2, int x);
 void	set_up(t_swap *stack, int i, int j, int sens);
 void	push_loop_a(t_swap *stack);
 void	push_loop_b(t_swap *stack);
-int	distance(t_swap *stack, int deb, int fin);
+int		distance(t_swap *stack, int deb, int fin);
 void	big_sort(t_swap *stack);
+int		from_chunk(t_swap *stack, int *chunk);
+void    set_loop(t_swap *stack, int x);
+void 	place_b(t_swap *stack, int x);
+void    order_b(t_swap *stack);
 
 #endif

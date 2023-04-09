@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:03:45 by lebronen          #+#    #+#             */
-/*   Updated: 2023/03/26 20:11:28 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:35:12 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,29 @@ int	distance(t_swap *stack, int deb, int fin)
 		j--;
 	}
 	return (min(i, stack->len_a - j));
+}
+
+int	ft_len(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (*s++)
+	{
+		i++;
+	}
+	return (i);
+}
+
+void	free_tab(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
 }
