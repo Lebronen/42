@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 22:06:09 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/07 11:47:27 by rshay            ###   ########.fr       */
+/*   Created: 2022/04/05 19:28:43 by yogun             #+#    #+#             */
+/*   Updated: 2022/04/05 21:23:57 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n);
+	if (n > 0)
+		s = ft_memset(s, 0, n);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 18:29:26 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/09 14:49:44 by rshay            ###   ########.fr       */
+/*   Created: 2022/04/05 21:19:43 by yogun             #+#    #+#             */
+/*   Updated: 2022/08/04 17:45:36 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s3;
 	int		i;
-	int		a;
-	int		b;
+	int		len1;
+	int		len2;
+	char	*str;
 
-	if (!s1 || !s2)
-		return (NULL);
-	a = ft_strlen((char *)s1);
-	b = ft_strlen((char *)s2);
-	s3 = (char *)malloc((a + b) * sizeof(char) + 1);
-	if (!s3)
-		return (NULL);
-	i = 0;
-	while (i < a)
+	if (s1 && s2)
 	{
-		s3[i] = s1[i];
-		i++;
+		len1 = ft_strlen(s1);
+		len2 = ft_strlen(s2);
+		str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+		if (str == NULL)
+			return (NULL);
+		i = -1;
+		while (s1[++i])
+			str[i] = s1[i];
+		i = -1;
+		while (s2[++i])
+		{
+			str[len1] = s2[i];
+			len1++;
+		}
+		str[len1] = '\0';
+		return (str);
 	}
-	i = -1;
-	while (++i < b)
-	{
-		s3[i + a] = s2[i];
-	}
-	s3[a + b] = 0;
-	return (s3);
+	return (NULL);
 }

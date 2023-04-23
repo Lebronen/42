@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/03 15:57:13 by rshay             #+#    #+#             */
-/*   Updated: 2022/09/03 16:05:48 by rshay            ###   ########.fr       */
+/*   Created: 2022/04/05 20:47:11 by yogun             #+#    #+#             */
+/*   Updated: 2022/04/05 21:22:44 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long long int	x;
-
-	x = n;
-	if (x < 0)
+	if (n == -2147483648)
 	{
-		x = -x;
 		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		ft_putnbr_fd(147483648, fd);
 	}
-	if (x >= 10)
+	else if (n < 0)
 	{
-		ft_putnbr_fd(x / 10, fd);
-		ft_putchar_fd((x % 10) + '0', fd);
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
 	}
+	else if (n < 10)
+		ft_putchar_fd(n + '0', fd);
 	else
-		ft_putchar_fd(x + '0', fd);
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
 }

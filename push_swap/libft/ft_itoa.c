@@ -3,62 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 16:12:59 by rshay             #+#    #+#             */
-/*   Updated: 2023/02/06 17:40:00 by rshay            ###   ########.fr       */
+/*   Created: 2022/04/05 19:29:23 by yogun             #+#    #+#             */
+/*   Updated: 2022/04/06 02:57:24 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_abs(int n)
+/*
+ ** count_cipher(int n): count cipher number, including sign minus.
+ ** If the number is negative, we put the - sign to the left. 
+ ** Once we enter the function str_numb,
+ ** we will start placing numbers from the right to left. 
+ ** So We will never overwrite the - sign if there is one,
+ ** as the while condition (n > 0) of strn_number will prevent it.
+ ** To handle the limiting case long long -2147483648LL,
+ ** we have to convert the int n to unsigned int (we can cast it)
+*/
+static size_t	count_cipher(int n)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
-}
+	size_t	cipher;
 
-static int	get_size(int n)
-{
-	int	size;
-
-	size = 1;
-	if (n < 0)
-		++size;
-	n /= 10;
+	cipher = 0;
+	if (n <= 0)
+		cipher++;
 	while (n)
 	{
-		++size;
-		n /= 10;
+		n = n / 10;
+		cipher++;
 	}
-	return (size);
+	return (cipher);
 }
 
-static void	ft_itoa2(char *s, int n, int len)
+char	*str_numb(char *number, unsigned int n, int cipher)
 {
-	if (n)
+	while (n > 0)
 	{
-		s[len] = ft_abs(n % 10) + 48;
-		ft_itoa2(s, n / 10, len - 1);
+		number[cipher--] = n % 10 + '0';
+		n = n / 10;
 	}
+	return (number);
 }
 
 char	*ft_itoa(int n)
 {
-	int		size;
-	char	*result;
+	char	*number_str;
+	int		cipher;
 
-	size = get_size(n);
-	result = (char *)malloc((size + 1) * sizeof (*result));
-	if (result != NULL)
+	cipher = count_cipher(n);
+	number_str = (char *)malloc(sizeof(char) * cipher + 1);
+	if (!number_str)
+		return (NULL);
+	number_str[cipher--] = '\0';
+	if (n == 0)
 	{
-		if (n < 0)
-			result[0] = '-';
-		else if (n == 0)
-			result[0] = '0';
-		ft_itoa2(result, n, size - 1);
-		result[size] = '\0';
+		number_str[cipher] = '0';
+		return (number_str);
 	}
-	return (result);
+	if (n < 0)
+	{
+		n = -n;
+		number_str[0] = '-';
+	}
+	number_str = str_numb(number_str, (unsigned int)n, cipher);
+	return (number_str);
 }

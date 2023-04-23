@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:00:07 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/08 14:05:04 by rshay            ###   ########.fr       */
+/*   Created: 2022/04/05 21:20:51 by yogun             #+#    #+#             */
+/*   Updated: 2022/04/06 01:42:09 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char		*sub;
-	size_t		i;
-	size_t		j;
+	char	*dst;
+	int		i;
+	size_t	len_s;
 
-	sub = (char *)malloc((len + 1) * sizeof(char));
-	if (!sub)
+	if (!s)
 		return (NULL);
+	len_s = ft_strlen((const char *)s);
+	if (len > len_s)
+		len = len_s;
+	if (start >= len_s)
+		return ((char *)ft_calloc(sizeof(char), 1));
 	i = 0;
-	j = 0;
-	while (s[i])
+	dst = (char *)malloc((len + 1) * sizeof(char));
+	if (!dst)
+		return (NULL);
+	while (len-- && s[i + (int)start])
 	{
-		if (i >= start && j < len)
-		{
-			sub[j] = s[i];
-			j++;
-		}
+		dst[i] = s[i + start];
 		i++;
 	}
-	sub[j] = 0;
-	return (sub);
+	dst[i] = '\0';
+	return (dst);
 }

@@ -3,37 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 22:14:30 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/09 16:21:35 by rshay            ###   ########.fr       */
+/*   Created: 2022/04/05 20:06:34 by yogun             #+#    #+#             */
+/*   Updated: 2022/09/01 18:12:10 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_ws(char c)
-{
-	return (c <= 13 || c == ' ');
-}
-
 int	ft_atoi(const char *str)
 {
-	int				i;
-	int				is_neg;
-	int				res;
+	int	res;
+	int	isnegative;
+	int	i;
 
+	res = 0;
 	i = 0;
-	while (is_ws(str[i]) && str[i])
+	isnegative = 0;
+	while ((str[i] <= 13 && str[i] >= 9) || str[i] == 32)
 		i++;
 	if (str[i] == '-')
-		is_neg = -1;
-	else
-		is_neg = 1;
-	if (is_neg == -1 || str[i] == '+')
+		isnegative = 1;
+	if (str[i] == '+' || str[i] == '-')
 		i++;
-	res = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-		res = (res * 10) + (str[i++] - '0');
-	return (res * is_neg);
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		res *= 10;
+		res += ((int)str[i] - 48);
+		i++;
+	}
+	if (isnegative)
+		return (-res);
+	else
+		return (res);
 }

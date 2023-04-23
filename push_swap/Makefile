@@ -1,29 +1,84 @@
-SRC = push_swap.c  push_utils.c rotate_utils.c swap_utils.c algo.c algo_utils.c calculs.c cases.c
-LIBFT= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_is_lower.c ft_is_upper.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memcmp.c ft_strlcpy.c ft_strlcat.c \
-    ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
-    ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putnbr_base.c ft_putaddr.c ft_printf.c ft_putstr_len.c ft_putstr_free.c ft_sizetoa.c ft_ustoa.c ft_itoa_ns.c
-
-CLIBFT = $(addprefix libft/, $(LIBFT))
-CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror
-
-OBJ = $(SRC:.c=.o) $(CLIBFT:.c=.o)
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/07/23 13:48:18 by yogun             #+#    #+#              #
+#    Updated: 2022/09/01 20:23:46 by yogun            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = push_swap
-
+CC = gcc
 RM = rm -f
+FLAGS = -Wall -Wextra -Werror
+LIBFTDIR = libft/
+OBJ_DIR = obj/
+BONUS = checker
+SRC_DIR = srcs/
 
-all:		$(NAME)
+SRC_1 = srcs/push_swap/push_swap.c \
 
-$(NAME): 	$(OBJ)
+SRC_2 =	srcs/push_swap/algorithm.c \
+		srcs/push_swap/ft_add_back.c \
+		srcs/push_swap/ft_stack_new.c \
+		srcs/push_swap/ft_check_utils.c \
+		srcs/push_swap/ft_parse.c \
+		srcs/push_swap/solver_utils_ab.c \
+		srcs/push_swap/solver_utils_ba.c \
+		srcs/push_swap/ft_rotate_and_push.c \
+		srcs/push_swap/operations.c \
+		srcs/push_swap/operations_2.c \
+		srcs/push_swap/operations_3.c \
+		srcs/push_swap/ft_check_dup.c \
+		srcs/push_swap/ft_check_sorted.c \
+		srcs/push_swap/ft_error_print.c \
+		srcs/push_swap/ft_free.c \
+		srcs/push_swap/lst_utils.c \
+		srcs/push_swap/lst_utils_2.c \
+		srcs/push_swap/ft_parse_args_quoted.c \
+		srcs/push_swap/ft_list_args.c \
+		srcs/push_swap/ft_check_args.c \
+		srcs/push_swap/ft_sort_big.c \
+		srcs/push_swap/ft_sort_three.c \
+		srcs/push_swap/ft_rotate_type.c \
+		
+BONUS_SRC = srcs/checker/checker.c \
+			srcs/checker/checker_utils.c \
+			
+
+OBJ_1 = ${SRC_1:.c=.o}
+OBJ_2 = ${SRC_2:.c=.o}
+
+BONUS_OBJ =${BONUS_SRC:.c=.o}
+
+INCLUDE = -L ./libft -lft
+
+.c.o:
+	${CC} -c $< -o ${<:.c=.o}
+
+${NAME}: ${OBJ_1} ${OBJ_2}
+	make -C $(LIBFTDIR)
+	${CC} ${FLAGS} ${OBJ_1} ${OBJ_2} -o ${NAME} ${INCLUDE}
+
+${BONUS}: ${OBJ_2} ${BONUS_OBJ} 
+	make -C $(LIBFTDIR)
+	${CC} ${FLAGS} ${BONUS_OBJ} ${OBJ_2} -o ${BONUS} ${INCLUDE}
+
+all: ${NAME} ${BONUS}
+
+bonus: ${BONUS} 
 
 clean:
-			$(RM) $(OBJ)
+	${RM} ${OBJ_1} ${OBJ_2} ${BONUS_OBJ} ${NAME} ${BONUS}
+	@cd $(LIBFTDIR) && $(MAKE) clean
 
-fclean:		clean
-			$(RM) $(NAME)
+fclean: clean
+	${RM} ${NAME}
+	@cd $(LIBFTDIR) && $(MAKE) fclean
 
-re:			fclean $(NAME)
+re: clean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re bonus
