@@ -3,92 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 15:02:38 by rshay             #+#    #+#             */
-/*   Updated: 2023/04/17 15:05:49 by rshay            ###   ########.fr       */
+/*   Created: 2023/04/23 18:42:33 by lebronen          #+#    #+#             */
+/*   Updated: 2023/04/23 18:42:33 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <unistd.h>
-# include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
 # include <stdbool.h>
-# include "../libft/libft.h"
+# include "libft.h"
+# define SA		0b000001
+# define SB		0b000010
+# define RA		0b000100
+# define RB		0b001000
+# define RRA	0b010000
+# define RRB	0b100000
 
-typedef struct s_stack
-{
-	long			nbr;
-	long			index;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
+typedef struct s_node {
+	struct s_node	*prev;
+	int				data;
+	struct s_node	*next;
+}				t_node;
 
-void		list_args(char **argv, t_stack **stack_a);
-void		ft_add_back(t_stack **stack, t_stack *stack_new);
-t_stack		*ft_stack_new(int content);
-int			check_args(char **argv);
-void		alpha_check(char **argv);
-int			check_error(char **argv, int i, int j);
-int			ft_checkdup(t_stack *a);
-int			ft_isalpha(int c);
-int			sign(int c);
-int			digit(int c);
-int			space(int c);
-void		ft_error(void);
-void		ft_free(t_stack **lst);
-t_stack		*ft_lstlast(t_stack *lst);
-void		ft_ra(t_stack **a, int j);
-void		ft_rb(t_stack **b, int j);
-void		ft_sa(t_stack **a, int j);
-void		ft_pa(t_stack **a, t_stack **b, int j);
-void		ft_pb(t_stack **stack_a, t_stack **stack_b, int j);
-void		ft_rra(t_stack **a, int j);
-void		ft_ss(t_stack **a, t_stack **b, int j);
-void		ft_rr(t_stack **a, t_stack **b, int j);
-void		ft_rrr_sub(t_stack **b, int j);
-void		ft_rrr(t_stack **a, t_stack **b, int j);
-t_stack		*ft_lstlast(t_stack *lst);
-int			ft_lstsize(t_stack *lst);
-int			ft_min(t_stack *a);
-int			ft_max(t_stack *a);
-int			ft_find_index(t_stack *a, int nbr);
-int			ft_find_place_b(t_stack *stack_b, int nbr_push);
-int			ft_find_place_a(t_stack *a, int nbr);
-void		ft_sort(t_stack **stack_a);
-int			ft_checksorted(t_stack *stack_a);
-void		ft_sort_big(t_stack **stack_a);
-void		ft_sort_three(t_stack **stack_a);
-t_stack		*ft_parse(int argc, char **argv);
-t_stack		*ft_parse_args_quoted(char **argv);
-void		ft_freestr(char **lst);
-int			ft_case_rarb_a(t_stack *a, t_stack *b, int c);
-int			ft_case_rrarrb_a(t_stack *a, t_stack *b, int c);
-int			ft_case_rarrb_a(t_stack *a, t_stack *b, int c);
-int			ft_case_rrarb_a(t_stack *a, t_stack *b, int c);
-int			ft_case_rarb(t_stack *a, t_stack *b, int c);
-int			ft_case_rrarrb(t_stack *a, t_stack *b, int c);
-int			ft_case_rrarb(t_stack *a, t_stack *b, int c);
-int			ft_case_rarrb(t_stack *a, t_stack *b, int c);
-int			ft_rotate_type_ab(t_stack *a, t_stack *b);
-int			ft_rotate_type_ba(t_stack *a, t_stack *b);
-int			ft_apply_rarb(t_stack **a, t_stack **b, int c, char s);
-int			ft_apply_rrarrb(t_stack **a, t_stack **b, int c, char s);
-int			ft_apply_rrarb(t_stack **a, t_stack **b, int c, char s);
-int			ft_apply_rarrb(t_stack **a, t_stack **b, int c, char s);
-void		ft_rrb(t_stack **b, int j);
-void		ft_check_sub(t_stack **a, t_stack **b, char *line);
-char		*ft_check(t_stack **a, t_stack **b, char *line);
-void		ft_checker_sub(t_stack **a, t_stack **b, char *line);
-t_stack		*ft_process(int argc, char **argv);
-void		ft_sb(t_stack **b, int j);
-void		algorithm(int argc, char **argv);
-void		ft_sort_b_till_3(t_stack **stack_a, t_stack **stack_b);
-t_stack		*ft_sub_process(char **argv);
-void		ft_error_ch(void);
+typedef struct s_stack {
+	char	name;
+	size_t	size;
+	bool	silent;
+	t_node	*head;
+}				t_stack;
+
+typedef struct s_push_swap {
+	t_stack	a;
+	t_stack	b;
+	t_stack	sorted;
+	int		prec;
+}				t_push_swap;
+
+typedef struct s_rotation {
+	size_t	a_count;
+	size_t	b_count;
+	void	(*a_fun)(t_push_swap *, t_stack *);
+	void	(*b_fun)(t_push_swap *, t_stack *);
+}				t_rotation;
+
+// Parsing
+bool	presort(t_stack *stack, t_stack *sorted);
+bool	parse_args(t_stack *stack, int argc, char const *argv[]);
+
+// Instructions
+void	swap(t_push_swap *ps, t_stack *stack);
+void	rotate(t_push_swap *ps, t_stack *stack);
+void	rrotate(t_push_swap *ps, t_stack *stack);
+void	push(t_push_swap *ps, t_stack *sender, t_stack *target);
+void	print_prec(t_push_swap *ps, int action);
+
+// Sorting
+void	frac_sort(t_push_swap *ps);
+void	sort_three(t_push_swap *ps, t_stack *s, bool (*cmp)(int, int));
+
+// Stack manipulation
+t_stack	new_stack(char name, bool silent);
+t_node	*new_node(int data);
+void	clear_nodes(t_stack *stack);
+void	list_add_sorted(t_node **list, t_node *new);
+void	cicrular_doubly_list_addback(t_node **list, t_node *new);
+void	cicrular_doubly_list_addfront(t_node **list, t_node *new);
+void	to_head(t_push_swap *ps, t_stack *stack, t_node *element);
+
+// Stack checks
+bool	ascending(int src, int next);
+bool	descending(int src, int next);
+bool	in_list(t_node *list, int data);
+bool	is_sorted(t_stack *stack, size_t size, bool (*cmp)(int, int));
+
+// Utils
+int		get_at(t_stack *stack, size_t index);
+t_node	*get_min(t_stack *stack);
+size_t	smin(size_t a, size_t b);
+size_t	get_pos(t_stack *stack, t_node *n);
+void	make_rotations(t_push_swap *ps, t_rotation *rotation);
+void	get_moves(t_push_swap *ps, t_node *node, size_t moves[4]);
 
 #endif

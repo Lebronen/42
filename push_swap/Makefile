@@ -1,84 +1,91 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rshay <rshay@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/23 10:18:14 by rshay             #+#    #+#              #
-#    Updated: 2023/04/23 10:18:18 by rshay            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# Variables
 
-NAME = push_swap
-CC = gcc
-RM = rm -f
-FLAGS = -Wall -Wextra -Werror
-LIBFTDIR = libft/
-OBJ_DIR = obj/
-BONUS = checker
-SRC_DIR = srcs/
+NAME		= push_swap
+NAME_B		= checker
+INCLUDE		= includes
+LIBFT		= libft
+SRC_DIR		= sources/
+OBJ_DIR		= objects/
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
+SMAKE		= make --no-print-directory
 
-SRC_1 = srcs/push_swap/push_swap.c \
+# Colors
 
-SRC_2 =	srcs/push_swap/algorithm.c \
-		srcs/push_swap/ft_add_back.c \
-		srcs/push_swap/ft_stack_new.c \
-		srcs/push_swap/ft_check_utils.c \
-		srcs/push_swap/ft_parse.c \
-		srcs/push_swap/solver_utils_ab.c \
-		srcs/push_swap/solver_utils_ba.c \
-		srcs/push_swap/ft_rotate_and_push.c \
-		srcs/push_swap/operations.c \
-		srcs/push_swap/operations_2.c \
-		srcs/push_swap/operations_3.c \
-		srcs/push_swap/ft_check_dup.c \
-		srcs/push_swap/ft_check_sorted.c \
-		srcs/push_swap/ft_error_print.c \
-		srcs/push_swap/ft_free.c \
-		srcs/push_swap/lst_utils.c \
-		srcs/push_swap/lst_utils_2.c \
-		srcs/push_swap/ft_parse_args_quoted.c \
-		srcs/push_swap/ft_list_args.c \
-		srcs/push_swap/ft_check_args.c \
-		srcs/push_swap/ft_sort_big.c \
-		srcs/push_swap/ft_sort_three.c \
-		srcs/push_swap/ft_rotate_type.c \
-		
-BONUS_SRC = srcs/checker/checker.c \
-			srcs/checker/checker_utils.c \
-			
+END			=	\033[0m
+BOLD		=	\033[1m
+UNDER		=	\033[4m
+REV			=	\033[7m
+DEF_COLOR	=	\033[0;39m
+GRAY		=	\033[0;90m
+RED			=	\033[0;91m
+LIGHT_RED	=	\033[0;31m
+GREEN		=	\033[0;92m
+YELLOW		=	\033[0;93m
+BLUE		=	\033[0;94m
+MAGENTA		=	\033[0;95m
+CYAN		=	\033[0;96m
+WHITE		=	\033[0;97m
 
-OBJ_1 = ${SRC_1:.c=.o}
-OBJ_2 = ${SRC_2:.c=.o}
+# Sources
 
-BONUS_OBJ =${BONUS_SRC:.c=.o}
+SRC_FILES	=	push_swap parser instructions sorting sort_utils utils stack_utils checks
+SRC_B_FILES	=	checker parser instructions utils stack_utils checks
 
-INCLUDE = -L ./libft -lft
 
-.c.o:
-	${CC} -c $< -o ${<:.c=.o}
+SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+SRC_B		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_B_FILES)))
+OBJ_B		=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_B_FILES)))
 
-${NAME}: ${OBJ_1} ${OBJ_2}
-	make -C $(LIBFTDIR)
-	${CC} ${FLAGS} ${OBJ_1} ${OBJ_2} -o ${NAME} ${INCLUDE}
+###
 
-${BONUS}: ${OBJ_2} ${BONUS_OBJ} 
-	make -C $(LIBFTDIR)
-	${CC} ${FLAGS} ${BONUS_OBJ} ${OBJ_2} -o ${BONUS} ${INCLUDE}
+OBJF		=	.cache_exists
 
-all: ${NAME} ${BONUS}
+all:		$(NAME)
 
-bonus: ${BONUS} 
+bonus:		$(NAME_B)
+
+$(NAME):	$(OBJ)
+			@$(SMAKE) -C $(LIBFT)
+			@$(CC) $(OBJ) -L $(LIBFT) -lft -o $(NAME)
+			@echo "$(GREEN)$(BOLD)$(NAME) compiled!$(DEF_COLOR)"
+
+$(NAME_B):	$(OBJ_B)
+			@$(SMAKE) -C $(LIBFT)
+			@$(CC) $(OBJ_B) -L $(LIBFT) -lft -o $(NAME_B)
+			@echo "$(GREEN)$(BOLD)$(NAME_B) compiled!$(DEF_COLOR)"
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+			@echo "\033[1A                                                     "
+			@echo -n "\033[1A"
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) -I $(INCLUDE) -I $(LIBFT)/includes -c $< -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
 
 clean:
-	${RM} ${OBJ_1} ${OBJ_2} ${BONUS_OBJ} ${NAME} ${BONUS}
-	@cd $(LIBFTDIR) && $(MAKE) clean
+			@$(RM) -r $(OBJ_DIR)
+			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
 
-fclean: clean
-	${RM} ${NAME}
-	@cd $(LIBFTDIR) && $(MAKE) fclean
+fclean:		clean
+			@$(RM) $(NAME)
+			@$(RM) $(NAME_B)
+			@$(SMAKE) -C $(LIBFT) fclean
+			@echo "$(CYAN)$(NAME) executable files cleaned!$(DEF_COLOR)"
 
-re: clean all
+re:			fclean all
 
-.PHONY: all clean fclean re bonus
+norm:
+			@norminette $(SRC) $(INCLUDE) | grep -v Norme | awk '{\
+			if ($$NF == "OK!") { \
+				print "$(GREEN)"$$0"$(END)" \
+			} else if ($$NF == "Error!") { \
+				print "$(RED)$(BOLD)"$$0"$(END)" \
+			} else if ($$1 == "Error:") { \
+				print "$(LIGHT_RED)"$$0"$(END)" \
+			} else { print }}'
+
+.PHONY:		all clean fclean re norm bonus

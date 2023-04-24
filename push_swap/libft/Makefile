@@ -1,67 +1,90 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/22 15:34:24 by yogun             #+#    #+#              #
-#    Updated: 2022/08/04 17:45:24 by yogun            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# Variables
+
+NAME		= libft.a
+INCLUDE		= includes
+SRC_DIR		= sources/
+OBJ_DIR		= objects/
+CC			= cc
+CFLAGS		= -Wall -Werror -Wextra
+RM			= rm -f
+AR			= ar rcs
+SMAKE		= make --no-print-directory
+
+# Colors
+
+END			=	\033[0m
+BOLD		=	\033[1m
+UNDER		=	\033[4m
+REV			=	\033[7m
+DEF_COLOR	=	\033[0;39m
+GRAY		=	\033[0;90m
+RED			=	\033[0;91m
+LIGHT_RED	=	\033[0;31m
+GREEN		=	\033[0;92m
+YELLOW		=	\033[0;93m
+BLUE		=	\033[0;94m
+MAGENTA		=	\033[0;95m
+CYAN		=	\033[0;96m
+WHITE		=	\033[0;97m
+
+# Sources
+
+SRC_FILES	=	ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
+				ft_isdigit ft_isprint ft_memchr ft_memcmp ft_memcpy ft_memmove \
+				ft_memset ft_strchr ft_strdup ft_strlcpy ft_strlen ft_strncmp \
+				ft_strnstr ft_strtrim ft_tolower ft_toupper ft_substr ft_strjoin \
+				ft_itoa ft_split ft_strmapi ft_strlcat ft_striteri ft_putendl_fd \
+				ft_putnbr_fd ft_putstr_fd ft_putchar_fd ft_strrchr \
+				ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back \
+				ft_lstdelone ft_lstclear ft_lstiter ft_lstmap get_next_line \
+				get_next_line_utils ft_printf flags_utils handlers putui putnbr \
+				putptr putstr putul_hex
 
 
-SRCS	=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-			ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c \
-			ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c \
-			ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c \
-			ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
-			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
-			ft_tolower.c ft_toupper.c ft_putendl_fd.c ft_striteri.c get_next_line.c
-			
-BONUS_SRCS	=   ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-			ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
-			
-OBJS    = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
-HDRS    = libft.h
-NAME    = libft.a
-RM  = rm -rf
-GCC = gcc
-AR  = ar -crs
-FLAGS   = -Wall -Wextra -Werror
+SRC			= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ			= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-NO_COLOR = \033[0;39m
-GREEN = \033[0;92m
-YELLOW = \033[0;93m
-BLUE = \033[0;94m
-CYAN = \033[0;96m
+###
 
-.c.o:
-		@$(GCC) $(FLAGS) -c $< -o $(<:.c=.o)
-		@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+OBJF		=	.cache_exists
 
-$(NAME):	$(OBJS) $(HDRS)
-			@$(AR) $(NAME) $(OBJS)
-			@echo "$(GREEN)libft compiled!$(DEF_COLOR)"
+all:		$(NAME)
 
-all:	$(NAME)
-		
+bonus:		all
 
-bonus:	$(OBJS) $(BONUS_OBJS) $(HDRS)
-		@$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
-		@echo "$(GREEN)libft BONUS compiled!$(DEF_COLOR)"
+$(NAME):	$(OBJ)
+			@$(AR) $(NAME) $(OBJ)
+			@echo "\033[1A                                                     "
+			@echo -n "\033[1A"
+			@echo "$(GREEN)$(BOLD)libft compiled!$(DEF_COLOR)"
 
-re:		clean fclean all
-		@echo "$(GREEN)libft RE compiled!$(DEF_COLOR)"
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+			@echo "\033[1A                                                     "
+			@echo -n "\033[1A"
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
 
 clean:
-		@$(RM) $(OBJS) $(BONUS_OBJS)
-		@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
+			@$(RM) -r $(OBJ_DIR)
+			@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
 
+fclean:		clean
+			@$(RM) $(NAME)
+			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
 
-fclean:	clean
-		@$(RM) $(NAME)
-		@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
-.PHONY:
-		all clean fclean re bonus
+re:			fclean all
+
+norm:
+			@norminette $(SRC) $(INCLUDE) | grep -v Norme | awk '{\
+			if ($$NF == "OK!") { \
+				print "$(GREEN)"$$0"$(END)" \
+			} else if ($$NF == "Error!") { \
+				print "$(RED)$(BOLD)"$$0"$(END)" \
+			} else if ($$1 == "Error:") { \
+				print "$(LIGHT_RED)"$$0"$(END)" \
+			} else { print }}'
+
+.PHONY:		all clean fclean re norm
