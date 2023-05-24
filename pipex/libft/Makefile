@@ -1,78 +1,49 @@
-#Variables
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gcollet <gcollet@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/11 12:58:26 by gcollet           #+#    #+#              #
+#    Updated: 2022/02/06 10:04:07 by gcollet          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME		= libft.a
-INCLUDE		= include
-SRC_DIR		= src/
-OBJ_DIR		= obj/
-CC			= cc
-CFLAGS		= -Wall -Werror -Wextra
-RM			= rm -f
-AR			= ar rcs
-SMAKE		= make --no-print-directory
+NAME 	= libft.a
+SRCS 	= ft_isalnum.c ft_isdigit.c ft_memccpy.c ft_memcpy.c ft_putchar_fd.c\
+		ft_putstr_fd.c ft_strdup.c ft_strlcpy.c ft_strncmp.c ft_strtrim.c\
+		ft_toupper.c ft_bzero.c ft_isalpha.c ft_isprint.c ft_memchr.c\
+		ft_memmove.c ft_putendl_fd.c ft_split.c ft_strjoin.c ft_strlen.c\
+		ft_strnstr.c ft_substr.c ft_atoi.c ft_calloc.c ft_isascii.c ft_itoa.c\
+		ft_memcmp.c ft_memset.c ft_putnbr_fd.c ft_strchr.c ft_strlcat.c\
+		ft_strmapi.c ft_strrchr.c ft_tolower.c ft_atof.c
+OBJS 	= ${SRCS:.c=.o}
+SRCS_B	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
+		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+OBJS_B	= ${SRCS_B:.c=.o}
+HEADER	= ./
 
-# Colors
+CC 		= gcc
+CFLAGS 	= -Wall -Wextra -Werror
 
-END			=	\033[0m
-BOLD		=	\033[1m
-UNDER		=	\033[4m
-REV			=	\033[7m
-DEF_COLOR	=	\033[0;39m
-GRAY		=	\033[0;90m
-RED			=	\033[0;91m
-LIGHT_RED	=	\033[0;31m
-GREEN		=	\033[0;92m
-YELLOW		=	\033[0;93m
-BLUE		=	\033[0;94m
-MAGENTA		=	\033[0;95m
-CYAN		=	\033[0;96m
-WHITE		=	\033[0;97m
+.c.o:		%.o : %.c
+					@${CC} ${CFLAGS} -I ${HEADER} -c $< -o $(<:.c=.o)
 
-# Sources
+$(NAME):	${OBJS}
+					@ar rc ${NAME} ${OBJS}
 
-SRC_FILES	=	ft_split ft_strjoin ft_strnstr ft_strlen
+all: 		${NAME}
 
-SRC			= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ			= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-
-###
-
-OBJF		=	.cache_exists
-
-all:		$(NAME)
-
-$(NAME):	$(OBJ)
-			@$(AR) $(NAME) $(OBJ)
-			@echo "\033[1A                                                     "
-			@echo -n "\033[1A"
-			@echo "$(GREEN)$(BOLD)libft compiled!$(DEF_COLOR)"
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@echo "\033[1A                                                     "
-			@echo -n "\033[1A"
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
-
-$(OBJF):
-			@mkdir -p $(OBJ_DIR)
+bonus:		${OBJS} ${OBJS_B}
+					@ar rc ${NAME} ${OBJS} ${OBJS_B}
 
 clean:
-			@$(RM) -r $(OBJ_DIR)
-			@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
+					@rm -f ${OBJS} ${OBJS_B}
 
-fclean:		clean
-			@$(RM) $(NAME)
-			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
+fclean: 	clean
+					@rm -f $(NAME)
 
 re:			fclean all
 
-norm:
-			@norminette $(SRC) $(INCLUDE) | grep -v Norme | awk '{\
-			if ($$NF == "OK!") { \
-				print "$(GREEN)"$$0"$(END)" \
-			} else if ($$NF == "Error!") { \
-				print "$(RED)$(BOLD)"$$0"$(END)" \
-			} else if ($$1 == "Error:") { \
-				print "$(LIGHT_RED)"$$0"$(END)" \
-			} else { print }}'
-
-.PHONY:		all clean fclean re norm
+.PHONY: all clean fclean re bonus

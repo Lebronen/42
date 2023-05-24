@@ -1,80 +1,76 @@
-#Variables
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/24 14:14:42 by lebronen          #+#    #+#              #
+#    Updated: 2023/05/24 14:14:44 by lebronen         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME		= pipex
-LIBFT		= libft
-INCLUDE		= include
-SRC_DIR		= src/
-OBJ_DIR		= obj/
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-RM			= rm -f
-SMAKE		= make --no-print-directory
+PROG	= pipex
+PROG_B  = pipex_bonus
 
-# Colors
+SRCS 	= srcs/pipex.c srcs/utils.c
+OBJS 	= ${SRCS:.c=.o}
+MAIN	= srcs/pipex.c
 
-END			=	\033[0m
-BOLD		=	\033[1m
-UNDER		=	\033[4m
-REV			=	\033[7m
-DEF_COLOR	=	\033[0;39m
-GRAY		=	\033[0;90m
-RED			=	\033[0;91m
-LIGHT_RED	=	\033[0;31m
-GREEN		=	\033[0;92m
-YELLOW		=	\033[0;93m
-BLUE		=	\033[0;94m
-MAGENTA		=	\033[0;95m
-CYAN		=	\033[0;96m
-WHITE		=	\033[0;97m
+SRCS_B	= srcs/pipex_bonus.c srcs/utils.c srcs/utils_bonus.c
+OBJS_B	= ${SRCS_B:.c=.o}
+MAIN_B	= srcs/pipex_bonus.c
 
-# Sources
+HEADER	= -Iincludes
 
-SRC_FILES	=	pipex utils
+CC 		= gcc
+CFLAGS 	= -Wall -Wextra -Werror -g
+
+.c.o:		%.o : %.c
+					@gcc ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+
+all: 		${PROG}
+
+${PROG}:	${OBJS}
+					@echo "\033[33m----Compiling lib----"
+					@make re -C ./libft
+					@$(CC) ${OBJS} -Llibft -lft -o ${PROG}
+					@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 
-SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+bonus:		${PROG_B}
 
-###
-
-OBJF		= .cache_exists
-
-all:		$(NAME)
-
-$(NAME):	$(OBJ)
-			@$(SMAKE) -C $(LIBFT)
-			@$(CC) $(OBJ) -L $(LIBFT) -lft -o $(NAME)
-			@echo "$(GREEN)$(BOLD)$(NAME) compiled!$(DEF_COLOR)"
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@echo "\033[1A                                                     "
-			@echo -n "\033[1A"
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -I $(INCLUDE) -I $(LIBFT)/includes -c $< -o $@
-
-$(OBJF):
-			@mkdir -p $(OBJ_DIR)
+${PROG_B}:	${OBJS_B}
+					@echo "\033[33m----Compiling lib----"
+					@make re -C ./libft
+					@$(CC) ${OBJS_B} -Llibft -lft -o ${PROG_B}
+					@echo "\033[32mPipex Bonus Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 clean:
-			@$(RM) -r $(OBJ_DIR)
-			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
+					@make clean -C ./libft
+					@rm -f ${OBJS} ${OBJS_B}
 
-fclean:		clean
-			@$(RM) $(NAME)
-			@$(RM) $(NAME_B)
-			@$(SMAKE) -C $(LIBFT) fclean
-			@echo "$(CYAN)$(NAME) executable files cleaned!$(DEF_COLOR)"
+fclean: 	clean
+					@make fclean -C ./libft
+					@rm -f $(NAME)
+					@rm -f ${PROG}
+					@echo "\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
 
 re:			fclean all
 
-norm:
-			@norminette $(SRC) $(INCLUDE) | grep -v Norme | awk '{\
-			if ($$NF == "OK!") { \
-				print "$(GREEN)"$$0"$(END)" \
-			} else if ($$NF == "Error!") { \
-				print "$(RED)$(BOLD)"$$0"$(END)" \
-			} else if ($$1 == "Error:") { \
-				print "$(LIGHT_RED)"$$0"$(END)" \
-			} else { print }}'
+re_bonus:	fclean bonus
 
-.PHONY:		all clean fclean re norm
+party:
+					@printf "\033c"
+					@echo "\n\033[35m♪┏(・o･)┛♪"
+					@sleep 1
+					@printf "\033c"
+					@echo "\033[1;33m♪┗(・o･)┓♪"
+					@sleep 1
+					@printf "\033c"
+					@echo "\n\033[36m♪┏(・o･)┛♪"
+					@sleep 1
+					@printf "\033c"
+					@echo "\033[34m♪┗(・o･)┓♪\n"
+
+.PHONY: all clean fclean re re_bonus bonus party

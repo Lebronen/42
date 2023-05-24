@@ -3,40 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 18:29:26 by rshay             #+#    #+#             */
-/*   Updated: 2022/11/09 14:49:44 by rshay            ###   ########.fr       */
+/*   Created: 2021/05/10 11:42:29 by gcollet           #+#    #+#             */
+/*   Updated: 2021/05/13 13:20:08 by gcollet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* Alloue (avec malloc) et retourne une nouvelle chaine, résultat de la 
+concaténation de s1 et s2. */
+/* La nouvelle chaine de caractères. NULL si l’allocation échoue. */
 
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s3;
+	char	*tab;
 	int		i;
-	int		a;
-	int		b;
+	int		j;
 
+	i = 0;
+	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	a = ft_strlen((char *)s1);
-	b = ft_strlen((char *)s2);
-	s3 = (char *)malloc((a + b) * sizeof(char) + 1);
-	if (!s3)
+	tab = (char *)malloc(sizeof(*tab) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	if (tab == 0)
 		return (NULL);
-	i = 0;
-	while (i < a)
+	while (s1[i])
 	{
-		s3[i] = s1[i];
+		tab[i] = s1[i];
 		i++;
 	}
-	i = -1;
-	while (++i < b)
+	while (s2[j])
 	{
-		s3[i + a] = s2[i];
+		tab[i] = s2[j];
+		j++;
+		i++;
 	}
-	s3[a + b] = 0;
-	return (s3);
+	tab[i] = '\0';
+	return (tab);
 }
