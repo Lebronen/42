@@ -6,20 +6,18 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:06:59 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/24 14:07:02 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/05/25 09:06:56 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-/* Function to display error message when arguments are wrong */
 void	usage(void)
 {
 	ft_putstr_fd("\033[31mError: Bad argument\n\e[0m", 2);
 	exit(EXIT_SUCCESS);
 }
 
-/* Function to open the files with the right flags */
 int	open_file(char *argv, int i)
 {
 	int	file;
