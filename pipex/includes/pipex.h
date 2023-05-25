@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:15:55 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/24 14:15:56 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:48:13 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	error(void);
 char	*find_path(char *cmd, char **envp);
 int		get_next_line(char **line);
 void	execute(char *argv, char **envp);
+int		is_slash(char *s);
 
 /* Bonus functions */
 int		open_file(char *argv, int i);

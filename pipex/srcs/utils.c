@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:14:02 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/25 09:07:25 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:51:27 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,19 @@ void	execute(char *argv, char **envp)
 	int		i;
 	char	*path;
 
-	i = -1;
 	cmd = ft_split(argv, ' ');
-	path = find_path(cmd[0], envp);
-	if (!path)
+	if (is_slash(cmd[0]))
+		path = cmd[0];
+	else
 	{
-		while (cmd[++i])
-			free(cmd[i]);
-		free(cmd);
-		error();
+		path = find_path(cmd[0], envp);
+		if (!path)
+		{
+			while (cmd[++i])
+				free(cmd[i]);
+			free(cmd);
+			error();
+		}
 	}
 	if (execve(path, cmd, envp) == -1)
 		error();
@@ -92,4 +96,18 @@ int	get_next_line(char **line)
 	*line = buffer;
 	free(buffer);
 	return (r);
+}
+
+int	is_slash(char *s)
+{
+	int		i;
+	
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
 }

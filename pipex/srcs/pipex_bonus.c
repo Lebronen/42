@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:05:04 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/25 09:06:24 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:05:36 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ int	main(int argc, char **argv, char **envp)
 		dup2(fileout, STDOUT_FILENO);
 		execute(argv[argc - 2], envp);
 	}
-	usage();
+	//usage();
 }
