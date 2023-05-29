@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:05:04 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/25 14:05:36 by rshay            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:57:35 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	child_process(char *argv, char **envp)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		execute(argv, envp);
+		execute(argv, envp, fd);
 	}
 	else
 	{
@@ -89,7 +89,6 @@ int	main(int argc, char **argv, char **envp)
 		while (i < argc - 2)
 			child_process(argv[i++], envp);
 		dup2(fileout, STDOUT_FILENO);
-		execute(argv[argc - 2], envp);
+		execute(argv[argc - 2], envp, NULL);
 	}
-	//usage();
 }

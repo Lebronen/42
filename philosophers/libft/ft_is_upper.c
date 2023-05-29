@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_is_upper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 18:39:42 by rshay             #+#    #+#             */
-/*   Updated: 2023/05/26 18:05:27 by lebronen         ###   ########.fr       */
+/*   Created: 2022/11/13 11:54:57 by rshay             #+#    #+#             */
+/*   Updated: 2022/11/13 11:54:59 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <pthread.h>
-
-
-void	*ft_philo(void *data);
-
-#endif
+int	ft_is_upper(char c)
+{
+	return (c >= 65 && c <= 90);
+}

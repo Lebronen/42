@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 18:39:42 by rshay             #+#    #+#             */
-/*   Updated: 2023/05/26 18:05:27 by lebronen         ###   ########.fr       */
+/*   Created: 2022/09/03 15:19:28 by rshay             #+#    #+#             */
+/*   Updated: 2022/11/15 16:50:21 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <pthread.h>
-
-
-void	*ft_philo(void *data);
-
-#endif
+int	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+	return (1);
+}

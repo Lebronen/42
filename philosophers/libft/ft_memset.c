@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 18:39:42 by rshay             #+#    #+#             */
-/*   Updated: 2023/05/26 18:05:27 by lebronen         ###   ########.fr       */
+/*   Created: 2022/08/30 22:01:33 by rshay             #+#    #+#             */
+/*   Updated: 2022/11/07 10:47:49 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <pthread.h>
+void	*ft_memset( void *pointer, int value, size_t count )
+{
+	size_t			i;
+	unsigned char	*dest;
 
-
-void	*ft_philo(void *data);
-
-#endif
+	i = 0;
+	dest = pointer;
+	while (i < count)
+	{
+		dest[i] = (unsigned char)value;
+		i++;
+	}
+	return (pointer);
+}

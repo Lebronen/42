@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:06:59 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/25 09:06:56 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/05/29 14:45:48 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	open_file(char *argv, int i)
 
 	file = 0;
 	if (i == 0)
-		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (i == 1)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (i == 2)
-		file = open(argv, O_RDONLY, 0777);
+		file = open(argv, O_RDONLY, 0644);
 	if (file == -1)
 		error();
 	return (file);

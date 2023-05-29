@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 18:39:42 by rshay             #+#    #+#             */
-/*   Updated: 2023/05/26 18:05:27 by lebronen         ###   ########.fr       */
+/*   Created: 2022/09/16 10:58:30 by rshay             #+#    #+#             */
+/*   Updated: 2022/10/28 00:17:04 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <pthread.h>
+void
+	ft_lstadd_back(t_list **alst, t_list *new)
+{
+	t_list	*last;
 
-
-void	*ft_philo(void *data);
-
-#endif
+	if (alst)
+	{
+		if (*alst)
+		{
+			last = ft_lstlast(*alst);
+			last->next = new;
+		}
+		else
+			*alst = new;
+	}
+}

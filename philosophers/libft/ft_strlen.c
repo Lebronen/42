@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 18:39:42 by rshay             #+#    #+#             */
-/*   Updated: 2023/05/26 18:05:27 by lebronen         ###   ########.fr       */
+/*   Created: 2022/09/02 16:47:55 by rshay             #+#    #+#             */
+/*   Updated: 2022/09/02 16:48:56 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <pthread.h>
+int	ft_strlen(const char *str)
+{
+	int	i;
 
-
-void	*ft_philo(void *data);
-
-#endif
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}

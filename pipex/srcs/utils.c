@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:14:02 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/25 13:51:27 by rshay            ###   ########.fr       */
+/*   Updated: 2023/05/29 15:04:47 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	execute(char *argv, char **envp)
+void	execute(char *argv, char **envp, int *fd)
 {
 	char	**cmd;
 	int		i;
@@ -64,6 +64,11 @@ void	execute(char *argv, char **envp)
 			while (cmd[++i])
 				free(cmd[i]);
 			free(cmd);
+			if (fd)
+			{
+				close(fd[0]);
+				close(fd[1]);
+			}
 			error();
 		}
 	}
@@ -101,7 +106,7 @@ int	get_next_line(char **line)
 int	is_slash(char *s)
 {
 	int		i;
-	
+
 	i = 0;
 	while (s[i])
 	{
