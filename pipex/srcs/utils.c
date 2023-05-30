@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:14:02 by lebronen          #+#    #+#             */
-/*   Updated: 2023/05/29 15:04:47 by rshay            ###   ########.fr       */
+/*   Updated: 2023/05/30 17:08:33 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,11 @@ void	execute(char *argv, char **envp, int *fd)
 		path = find_path(cmd[0], envp);
 		if (!path)
 		{
+			i = 0;
 			while (cmd[++i])
 				free(cmd[i]);
 			free(cmd);
-			if (fd)
-			{
-				close(fd[0]);
-				close(fd[1]);
-			}
-			error();
+			error_fd(fd);
 		}
 	}
 	if (execve(path, cmd, envp) == -1)
