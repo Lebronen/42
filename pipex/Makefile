@@ -29,7 +29,7 @@ CYAN		=	\033[0;96m
 WHITE		=	\033[0;97m
 
 SRC_FILES	=	pipex utils utils2
-SRC_B_FILES	=	pipex_bonus utils_bonus utils
+SRC_B_FILES	=	pipex_bonus utils_bonus utils utils2
 
 
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
