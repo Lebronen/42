@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:14:02 by lebronen          #+#    #+#             */
-/*   Updated: 2023/06/15 20:09:25 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:57:35 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*find_path(char *cmd, char **envp)
 
 void	error(void)
 {
-	perror("\033[31mError");
+	perror("Error");
 	exit(EXIT_FAILURE);
 }
 
@@ -65,10 +65,9 @@ void	execute(char *argv, char **envp, int *fd)
 			free(cmd[i]);
 		free(cmd);
 		if (!path)
-			error();
-		error_fd(fd);
+			error_fd(fd);
+		error();
 	}
-		
 }
 
 int	get_next_line(char **line)
