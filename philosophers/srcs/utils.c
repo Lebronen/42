@@ -6,12 +6,46 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:25:20 by lebronen          #+#    #+#             */
-/*   Updated: 2023/08/30 20:38:41 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:50:06 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
+bool	is_in_strings(char c, char *str)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (true);
+		str++;
+	}
+	return (false);
+}
+
+long	ft_atoi(const char *str)
+{
+	int		sign;
+	long	result;
+
+	while (is_in_strings(*(char *) str, "\t\n\v\f\r "))
+		str++;
+	sign = 1;
+	if (*str == '-')
+		sign *= -1;
+	if (*str == '-' || *str == '+')
+		str++;
+	result = 0;
+	while (*str >= '0' && *str <= '9')
+	{
+		if (result * 10 < 0)
+			return (-1);
+		result *= 10;
+		result += *str - '0';
+		str++;
+	}
+	return (result * sign);
+}
 int	input_checker(char **argv)
 {
 	int	i;
@@ -37,9 +71,9 @@ int	input_checker(char **argv)
 	return (0);
 }
 
-int	ft_usleep(useconds_t time)
+int	ft_usleep(int time)
 {
-	u_int64_t	start;
+	int		start;
 
 	start = get_time();
 	while ((get_time() - start) < time)

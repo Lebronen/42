@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:39:42 by rshay             #+#    #+#             */
-/*   Updated: 2023/08/30 20:39:57 by lebronen         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:52:43 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,26 @@ typedef struct s_data
 	int             dead;
 	int             finished;
 	t_philo         *philos;
-	u_int64_t		death_time;
-	u_int64_t		eat_time;
-	u_int64_t		sleep_time;
-	u_int64_t		start_time;
+	int		death_time;
+	int		eat_time;
+	int		sleep_time;
+	int		start_time;
 	pthread_mutex_t *forks;
 	pthread_mutex_t lock;
 	pthread_mutex_t write;
 } t_data;
 
-int     init(t_data *data, int ac, char **av);
-int	input_checker(char **argv);
-int	error(char *str, t_data *data);
-int	ft_usleep(useconds_t time);
-int	ft_strcmp(char *s1, char *s2);
+int     	init(t_data *data, int ac, char **av);
+int			input_checker(char **argv);
+int			error(char *str, t_data *data);
+int			ft_usleep(int time);
+int			ft_strcmp(char *s1, char *s2);
+int			get_time(void);
+void    	*routine(void *philo_pointer);
+long		ft_atoi(const char *str);
+void		ft_exit(t_data *data);
+int 		thread_init(t_data *data);
+void    message(char *str, t_philo *philo);
+void	eat(t_philo *philo);
 
 #endif
