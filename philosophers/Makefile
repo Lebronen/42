@@ -1,61 +1,76 @@
-NAME = philo
+# Variables
 
-CC = gcc
+NAME		= philo
+INCLUDE		= includes
+SRC_DIR		= sources/
+OBJ_DIR		= objects/
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
+SMAKE		= make --no-print-directory
 
-CFLAGS = -Wall -Werror -Wextra -g
+# Colors
 
-Y = "\033[33m"
-R = "\033[31m"
-G = "\033[32m"
-B = "\033[34m"
-X = "\033[0m"
-UP = "\033[A"
-CUT = "\033[K"
+END			=	\033[0m
+BOLD		=	\033[1m
+UNDER		=	\033[4m
+REV			=	\033[7m
+DEF_COLOR	=	\033[0;39m
+GRAY		=	\033[0;90m
+RED			=	\033[0;91m
+LIGHT_RED	=	\033[0;31m
+GREEN		=	\033[0;92m
+YELLOW		=	\033[0;93m
+BLUE		=	\033[0;94m
+MAGENTA		=	\033[0;95m
+CYAN		=	\033[0;96m
+WHITE		=	\033[0;97m
 
-CFILES = srcs/philosophers.c srcs/init.c srcs/utils.c \
-			srcs/threads.c srcs/actions.c \
+# Sources
 
-OBJECTS = $(CFILES:.c=.o)
+SRC_FILES	=	philosophers parser initializer time routines utils
 
-all: libraries $(NAME)
 
-%.o : %.c
-	@echo $(Y)Compiling [$<]...$(X)
-	@$(CC) $(CFLAGS) -c -o $@ $< -lpthread
-	@printf $(UP)$(CUT)
+SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-libraries:
-#	@echo $(B)
-#	make -C $(LIBFT_PATH) all
-#	@echo $(B)
-#	make -C $(PRINTF_PATH) all
+###
 
-$(NAME): $(OBJECTS)
-	@echo $(Y)Compiling [$(CFILES)]...$(X)
-	@echo $(G)Finished [$(CFILES)]$(X)
-	@echo
-	@echo $(Y)Compiling [$(NAME)]...$(X)
-	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(PRINTF_LIB) $(OBJECTS) -o $(NAME)
-	@echo $(G)Finished [$(NAME)]$(X)
+OBJF		=	.cache_exists
+
+all:		$(NAME)
+
+$(NAME):	$(OBJ)
+			@$(CC) $(CFLAGS) $(OBJ) -pthread -o $(NAME)
+			@echo "$(GREEN)$(BOLD)$(NAME) compiled!$(DEF_COLOR)"
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+			@echo "\033[1A                                                     "
+			@echo -n "\033[1A"
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) -I $(INCLUDE) -pthread -c $< -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
 
 clean:
-#	@make -C $(LIBFT_PATH) clean
-#	@make -C $(PRINTF_PATH) clean
-	@rm -f $(OBJECTS)
-	@echo $(R)Removed [$(OBJECTS)]$(X)
-	@echo $(R)Removed libraries.o$(X)
+			@$(RM) -r $(OBJ_DIR)
+			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
 
-fclean: clean
-#	@make -C $(LIBFT_PATH) fclean
-#	@make -C $(PRINTF_PATH) fclean
-	@rm -f $(NAME)
-	@echo $(R)Removed [$(NAME)]$(X)
+fclean:		clean
+			@$(RM) $(NAME)
+			@echo "$(CYAN)$(NAME) executable files cleaned!$(DEF_COLOR)"
 
-re: fclean all
+re:			fclean all
 
 norm:
-	norminette ft_printf utils checker
+			@norminette $(SRC) $(INCLUDE) | grep -v Norme | awk '{\
+			if ($$NF == "OK!") { \
+				print "$(GREEN)"$$0"$(END)" \
+			} else if ($$NF == "Error!") { \
+				print "$(RED)$(BOLD)"$$0"$(END)" \
+			} else if ($$1 == "Error:") { \
+				print "$(LIGHT_RED)"$$0"$(END)" \
+			} else { print }}'
 
-#run:	all
-
-.PHONY: all clean fclean re norm
+.PHONY:		all clean fclean re norm
