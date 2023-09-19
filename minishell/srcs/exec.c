@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:42:53 by rshay             #+#    #+#             */
-/*   Updated: 2023/06/19 18:07:12 by rshay            ###   ########.fr       */
+/*   Updated: 2023/09/19 16:05:19 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ void    execute(char *commande, char **envp)
 
 void	process(char *commande, char **envp)
 {
-	int		i;
-	int		nb;
+	int		nb_pipes;
+	int		nb_redout;
+	int		nb_redin;
 	pid_t   pid;
 	int		status;
 
-	i = 0;
-	nb = nb_str(commande, '|');
-	if (!nb)
+	nb_pipes = nb_str(commande, '|');
+	nb_redout = nb_str(commande, '>');
+	nb_redin = nb_str(commande, '<');
+	if (!nb_pipes && !nb_redout && !nb_redin)
 	{
 		pid = fork();
 		if (pid == 0)
@@ -105,6 +107,10 @@ void	process(char *commande, char **envp)
 		else
 			perror("fork");
 	}
-	else
+	else if (nb_pipes)
 		ft_pipe(commande, envp);
+	else if (nb_redout)
+		ft_redirect_out(commande, envp);
+	else
+		ft_redirect_in(commande, envp);
 }
