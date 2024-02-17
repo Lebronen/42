@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/18 15:42:53 by rshay             #+#    #+#             */
-/*   Updated: 2023/09/19 16:05:19 by lebronen         ###   ########.fr       */
+/*   Created: 2023/11/28 16:14:32 by lebronen          #+#    #+#             */
+/*   Updated: 2023/12/19 17:04:36 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ char	*find_path(char *cmd, char **envp)
 	return (0);
 }
 
-void	error(void)
+void	error(t_data *data)
 {
 	perror("Error");
+	data->last_error = 666;
 	exit(EXIT_FAILURE);
 }
 
@@ -61,56 +62,48 @@ int	is_slash(char *s)
 	return (0);
 }
 
-
-void    execute(char *commande, char **envp)
+void	execute(char **commande, t_data *data)
 {
-    char    **cmd;
-    char    *path;
-    int     i;
-    
-    
-        cmd = ft_split(commande, ' ');
-        if (is_slash(cmd[0]))
-            path = cmd[0];
-        else
-            path = find_path(cmd[0], envp);
-        if (!path || execve(path, cmd, envp) == -1)
-	    {  
-            i = -1;
-            while (cmd[++i])
-                free(cmd[i]);
-            free(cmd);
-            error();
+	char	*path;
+	char	**tab;
+
+	path = NULL;
+	tab = list_to_tab(data->envp);
+	if (is_slash(commande[0]))
+		path = commande[0];
+	else if (!data->is_env)
+	{
+		path = ft_strdup(data->path);
+		ft_strlcat(path, commande[0], ft_strlen(commande[0]) + 6);
+	}
+	else if (data->is_path)
+		path = find_path(commande[0], tab);
+	if (!path || execve(path, commande, tab) == -1)
+	{
+		if (!path)
+		{
+			print_error(127, commande[0], " Command not found\n", data);
 		}
+		else if (commande[0][0] == '/')
+			print_error(127, commande[0], " No such file or directory\n", data);
+		exit(127);
+	}
 }
 
-void	process(char *commande, char **envp)
+void	process(t_node *node, t_data *data, int in, int out)
 {
-	int		nb_pipes;
-	int		nb_redout;
-	int		nb_redin;
-	pid_t   pid;
-	int		status;
-
-	nb_pipes = nb_str(commande, '|');
-	nb_redout = nb_str(commande, '>');
-	nb_redin = nb_str(commande, '<');
-	if (!nb_pipes && !nb_redout && !nb_redin)
-	{
-		pid = fork();
-		if (pid == 0)
-			execute(commande, envp);
-		else if (pid > 0)
-    	{
-			waitpid(pid, &status, 0);
-    	}
-		else
-			perror("fork");
-	}
-	else if (nb_pipes)
-		ft_pipe(commande, envp);
-	else if (nb_redout)
-		ft_redirect_out(commande, envp);
+	if (node->str_options && node->str_options[0]
+		&& !ft_strncmp(node->str_options[0], "./minishell", 12))
+		signal(SIGINT, SIG_IGN);
 	else
-		ft_redirect_in(commande, envp);
+	{
+		signal(SIGINT, signal_handler_exec);
+		signal(SIGQUIT, signal_handler_exec);
+	}
+	execloop(node, in, out);
+	if (g_sig_handle == SIGINT)
+		data->last_error = 130;
+	if (g_sig_handle == SIGQUIT)
+		data->last_error = 131;
+	g_sig_handle = 0;
 }
