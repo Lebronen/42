@@ -45,27 +45,28 @@ int Contact::getId() {
     return id;
 }
 
-void Contact::printSearch() {
+void truncPrint(std::string arg) {
     int cut;
+
+    cut = arg.length() - 10;
+    if (cut > 0) {
+        std::cout << arg.substr(0, 10);
+        std::cout << ".|";
+     }
+    else {
+        std::cout << std::setw(10);
+        std::cout << arg << "|";
+    }
+
+}
+
+void Contact::printSearch() {
     std::cout << std::setw(10);
     std::cout << id << "|";
-    std::cout << std::setw(10);
-    cut = first_name.length() - 10;
-    if (cut > 0) {
-        std::cout << first_name.substr(0, 10);
-        for (int i = 0; i < cut; i++) {
-            std::cout << ".";
-        }
-        std::cout << "|";
-    }
-    else
-        std::cout << first_name << "|";
-    std::cout << std::setw(10);
-    cut = last_name.length() - 10;
-    std::cout << last_name << "|";
-    std::cout << std::setw(10);
-    cut = nickname.length() - 10;
-    std::cout << nickname << std::endl;
+    truncPrint(first_name);
+    truncPrint(last_name);
+    truncPrint(nickname);
+    std::cout << std::endl;
 
 }
 
