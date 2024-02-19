@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:28:52 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 16:20:43 by rshay            ###   ########.fr       */
+/*   Updated: 2024/02/19 22:20:54 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FIXFLOAT_HPP
 
 #include <iostream>
+#include <fstream>
 
 class Fixed {
 
@@ -21,20 +22,20 @@ class Fixed {
     private :
 
     int valeur;
-    const static int bits = 8;
+    static const int bits = 8;
 
     //Constructeurs
     public :
 
     Fixed(void);
-    Fixed(Fixed& cpy);
+    Fixed(Fixed const &cpy);
     Fixed(int const entier);
     Fixed(float const flottant);
 
     //Fonctions
     public :
 
-    Fixed &operator=(Fixed &other);
+    Fixed &operator=(Fixed const &other);
     int getRawBits(void) const;
     void setRawBits(int const raw);
     float toFloat(void) const;

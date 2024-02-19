@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:29:19 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 16:20:39 by rshay            ###   ########.fr       */
+/*   Updated: 2024/02/19 22:22:08 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Fixed::Fixed() {
     valeur = 0;
 }
 
-Fixed::Fixed(Fixed& cpy) {
+Fixed::Fixed(Fixed const &cpy) {
     std::cout << "Copy constructor called" << std::endl;
     *this = cpy;
 }
@@ -36,16 +36,14 @@ Fixed::Fixed(float const flottant) {
 }
 
 int Fixed::getRawBits(void) const{
-    std::cout << "getRawBits member function called" << std::endl;
     return this->valeur;
 }
 
 void Fixed::setRawBits(int const raw) {
-    std::cout << "setRawBits member function called" << std::endl;
     this->valeur = raw;
 }
 
-Fixed &Fixed::operator=(Fixed &other) {
+Fixed &Fixed::operator=(Fixed const &other) {
     std::cout << "Copy assignment operator called" << std::endl;
     this->valeur = other.getRawBits();
     return (*this);

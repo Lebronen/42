@@ -6,6 +6,7 @@
 
 class Contact {
 
+    //attributs
     private:
 
     static int cid;
@@ -16,10 +17,12 @@ class Contact {
     private : std::string phone_number;
     private : std::string darkest_secret;
 
+    //Constructeurs
     public:
     Contact(std::string first, std::string last, std::string nick, std::string number, std::string secret);
     Contact();
 
+    //Fonctions
     std::string getFirstName();
 
     std::string getLastName();

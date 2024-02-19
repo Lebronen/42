@@ -1,74 +1,26 @@
-# Variables
+NAME = ex01
 
-NAME		= ex01
-INCLUDE		= ./
-SRC_DIR		= ./
-OBJ_DIR		= ./
-CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
-RM			= rm -f
-SMAKE		= make --no-print-directory
+SRC		=	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp zombieHorde.cpp
 
-# Colors
+CC 		= c++
 
-END			=	\033[0m
-BOLD		=	\033[1m
-UNDER		=	\033[4m
-REV			=	\033[7m
-DEF_COLOR	=	\033[0;39m
-GRAY		=	\033[0;90m
-RED			=	\033[0;91m
-LIGHT_RED	=	\033[0;31m
-GREEN		=	\033[0;92m
-YELLOW		=	\033[0;93m
-BLUE		=	\033[0;94m
-MAGENTA		=	\033[0;95m
-CYAN		=	\033[0;96m
-WHITE		=	\033[0;97m
+FLAGS	= -std=c++98 -Wall -Wextra -Werror 
 
-SRC_FILES	=	main Zombie newZombie randomChump zombieHorde
+OBJS 	= $(SRC:.c=.o)
 
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(SRC) -o $(NAME)
 
-SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))
-OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+all: $(NAME) $(OBJS)
 
-###
-
-OBJF		=	.cache_exists
-
-all:		$(NAME)
-
-$(NAME):	$(OBJ)
-			@$(CC) $(OBJ) -o $(NAME)
-			@echo "$(GREEN)$(BOLD)$(NAME) compiled!$(DEF_COLOR)"
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@echo "\033[1A                                                     "
-			@echo -n "\033[1A"
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -I $(INCLUDE) -I $(LIBFT)/includes -c $< -o $@
-
-$(OBJF):
-			@mkdir -p $(OBJ_DIR)
+%.o: %.c
+		$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-			@$(RM) $(OBJ)
-			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
+	rm -rf $(NAME)
 
-fclean:		clean
-			@$(RM) $(NAME)
-			@echo "$(CYAN)$(NAME) executable files cleaned!$(DEF_COLOR)"
+fclean: clean
 
-re:			fclean all
+re: fclean all
 
-norm:
-			@norminette $(SRC) $(INCLUDE) | grep -v Norme | awk '{\
-			if ($$NF == "OK!") { \
-				print "$(GREEN)"$$0"$(END)" \
-			} else if ($$NF == "Error!") { \
-				print "$(RED)$(BOLD)"$$0"$(END)" \
-			} else if ($$1 == "Error:") { \
-				print "$(LIGHT_RED)"$$0"$(END)" \
-			} else { print }}'
-
-.PHONY:		all clean fclean re norm bonus
+.PHONY: all clean fclean re

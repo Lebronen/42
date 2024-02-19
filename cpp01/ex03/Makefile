@@ -1,6 +1,6 @@
-NAME = zombies
+NAME = ex03
 
-SRC		=	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRC		=	Weapon.cpp HumanA.cpp HumanB.cpp main.cpp
 
 CC 		= c++
 

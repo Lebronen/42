@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 15:28:52 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 22:16:31 by lebronen         ###   ########.fr       */
+/*   Created: 2024/02/17 18:15:58 by lebronen          #+#    #+#             */
+/*   Updated: 2024/02/17 18:21:43 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXFLOAT_HPP
-# define FIXFLOAT_HPP
+#ifndef WEAPON_HPP
+# define WEAPON_HPP
 
 #include <iostream>
 
-class Fixed {
-
-    //Attributs
+class Weapon {
+    
+    //attributs
     private :
-
-    int valeur;
-    static const int bits = 8;
+    
+    std::string type;
 
     //Constructeurs
     public :
-
-    Fixed(void);
-    Fixed(Fixed& cpy);
+    
+    Weapon(std::string type);
+    Weapon(void);
+    ~Weapon(void);
 
     //Fonctions
     public :
 
-    Fixed &operator=(Fixed &other);
-    int getRawBits(void);
-    void setRawBits(int const raw);
-
-    //Destructeur
-    public :
-
-    ~Fixed(void);
+    const std::string& getType(void);
+    void setType(std::string type);
+    
     
 };
 

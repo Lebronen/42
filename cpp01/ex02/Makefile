@@ -1,6 +1,6 @@
-NAME = zombies
+NAME = ex02
 
-SRC		=	main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRC		=	main.cpp
 
 CC 		= c++
 

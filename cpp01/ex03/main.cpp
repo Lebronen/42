@@ -5,18 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:04:26 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 22:37:15 by lebronen         ###   ########.fr       */
+/*   Created: 2024/02/17 18:55:20 by lebronen          #+#    #+#             */
+/*   Updated: 2024/02/17 18:56:40 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <iostream>
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-int main() {
-    Zombie z("zombie");
-    Zombie *tsunami = z.zombieHorde(3, "tsunami");
-    tsunami->hordeAnnounce(tsunami);
-    tsunami->deleteHorde(tsunami);
+int main()
+{
+    {
+        Weapon club = Weapon("crude spiked club");
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("some other type of club");
+        bob.attack();
+    }
+    {
+        Weapon club = Weapon("crude spiked club");
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("some other type of club");
+        jim.attack();
+    }
     return 0;
 }

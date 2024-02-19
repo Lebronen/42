@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:04:26 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 22:37:15 by lebronen         ###   ########.fr       */
+/*   Created: 2024/02/17 18:50:00 by lebronen          #+#    #+#             */
+/*   Updated: 2024/02/18 13:06:27 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <iostream>
+#include "HumanB.hpp"
 
-int main() {
-    Zombie z("zombie");
-    Zombie *tsunami = z.zombieHorde(3, "tsunami");
-    tsunami->hordeAnnounce(tsunami);
-    tsunami->deleteHorde(tsunami);
-    return 0;
+HumanB::HumanB(std::string) {
+    this->name = name;
+    this->arme = NULL;
+}
+
+void HumanB::setWeapon(Weapon& arme) {
+    this->arme = &arme;
+}
+
+void HumanB::attack(void) {
+    std::cout << name << " attacks with their " << arme->getType() << std::endl;
+}
+
+HumanB::~HumanB(void) {
+    
 }

@@ -1,46 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 15:28:52 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 22:16:31 by lebronen         ###   ########.fr       */
+/*   Created: 2024/02/17 18:27:30 by lebronen          #+#    #+#             */
+/*   Updated: 2024/02/18 13:03:19 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXFLOAT_HPP
-# define FIXFLOAT_HPP
+#ifndef HUMANA_HPP
+# define HUMANA_HPP
 
 #include <iostream>
+#include "Weapon.hpp"
 
-class Fixed {
+class HumanA {
 
-    //Attributs
+    //attributs
     private :
 
-    int valeur;
-    static const int bits = 8;
+    Weapon& arme;
+    std::string name;
 
     //Constructeurs
-    public :
-
-    Fixed(void);
-    Fixed(Fixed& cpy);
-
+    public:
+    
+    HumanA(std::string name, Weapon& arme);
+    
     //Fonctions
     public :
-
-    Fixed &operator=(Fixed &other);
-    int getRawBits(void);
-    void setRawBits(int const raw);
-
-    //Destructeur
-    public :
-
-    ~Fixed(void);
     
+    void attack(void);    
+    ~HumanA(void);
 };
 
 #endif

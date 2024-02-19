@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:04:26 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 22:37:15 by lebronen         ###   ########.fr       */
+/*   Created: 2024/02/17 18:22:45 by lebronen          #+#    #+#             */
+/*   Updated: 2024/02/17 18:26:46 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include <iostream>
+#include "Weapon.hpp"
 
-int main() {
-    Zombie z("zombie");
-    Zombie *tsunami = z.zombieHorde(3, "tsunami");
-    tsunami->hordeAnnounce(tsunami);
-    tsunami->deleteHorde(tsunami);
-    return 0;
+Weapon::Weapon(std::string type) {
+    this->type = type;
+}
+
+Weapon::Weapon(void) {
+    
+}
+
+const std::string& Weapon::getType(void) {
+    return this->type;
+}
+
+void Weapon::setType(std::string type) {
+    this->type = type;
+}
+
+Weapon::~Weapon(void) {
+    
 }
