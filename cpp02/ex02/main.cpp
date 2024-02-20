@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 18:50:00 by lebronen          #+#    #+#             */
-/*   Updated: 2024/02/20 12:43:43 by rshay            ###   ########.fr       */
+/*   Created: 2024/02/20 15:46:22 by rshay             #+#    #+#             */
+/*   Updated: 2024/02/20 16:22:30 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanB.hpp"
+#include "Fixed.hpp"
+#include <iostream>
 
-HumanB::HumanB(std::string name) {
-    this->name = name;
-    this->arme = NULL;
-}
-
-void HumanB::setWeapon(Weapon& arme) {
-    this->arme = &arme;
-}
-
-void HumanB::attack(void) {
-    std::cout << name << " attacks with their " << arme->getType() << std::endl;
-}
-
-HumanB::~HumanB(void) {
-    
+int main( void ) {
+Fixed a;
+Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+std::cout << a << std::endl;
+std::cout << ++a << std::endl;
+std::cout << a << std::endl;
+std::cout << a++ << std::endl;
+std::cout << a << std::endl;
+std::cout << b << std::endl;
+std::cout << Fixed::max( a, b ) << std::endl;
+return 0;
 }
