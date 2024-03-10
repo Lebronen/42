@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 15:40:47 by rshay             #+#    #+#             */
-/*   Updated: 2024/03/07 15:27:51 by lebronen         ###   ########.fr       */
+/*   Created: 2024/03/07 15:01:00 by lebronen          #+#    #+#             */
+/*   Updated: 2024/03/07 15:17:27 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
-#include <iostream>
+#ifndef SCAV_TRAP_HPP
+# define SCAV_TRAP_HPP
 
-int main(void)
-{
-    Fixed a;
-    Fixed b(a);
-    Fixed c;
+#include "ClapTrap.hpp"
 
-    c = b;
+class ScavTrap: public ClapTrap {
 
-    std::cout << a.getRawBits() << std::endl;
-    std::cout << b.getRawBits() << std::endl;
-    std::cout << c.getRawBits() << std::endl;
+    //Constructeur
+    ScavTrap(std::string name);
 
-    return 0;
-}
+    //Destructeur
+    ~ScavTrap();
+    
+};
+
+
+# endif

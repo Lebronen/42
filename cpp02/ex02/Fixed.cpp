@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:29:19 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/20 16:23:22 by rshay            ###   ########.fr       */
+/*   Updated: 2024/03/07 16:00:59 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ Fixed &Fixed::operator--(void) {
 
 Fixed Fixed::operator--(int) {
     Fixed tmp(valeur);
-    --valeur;
+    valeur--;
     return tmp;
 }
 

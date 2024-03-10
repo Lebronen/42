@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:29:19 by rshay             #+#    #+#             */
-/*   Updated: 2024/02/19 15:47:14 by rshay            ###   ########.fr       */
+/*   Updated: 2024/03/07 14:20:53 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Fixed::Fixed(Fixed& cpy) {
     *this = cpy;
 }
 
-int Fixed::getRawBits(void) {
+int Fixed::getRawBits(void) const {
     std::cout << "getRawBits member function called" << std::endl;
     return this->valeur;
 }

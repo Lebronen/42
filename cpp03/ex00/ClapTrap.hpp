@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 15:28:52 by rshay             #+#    #+#             */
-/*   Updated: 2024/03/07 14:20:45 by lebronen         ###   ########.fr       */
+/*   Created: 2024/02/22 14:12:30 by lebronen          #+#    #+#             */
+/*   Updated: 2024/02/26 15:48:29 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXFLOAT_HPP
-# define FIXFLOAT_HPP
+#ifndef CLAP_TRAP_HPP
+# define CLAP_TRAP_HPP
 
 #include <iostream>
 
-class Fixed {
+class ClapTrap {
 
-    //Attributs
+    //attributs
     private :
 
-    int valeur;
-    static const int bits = 8;
+    std::string name;
+    int hit_points;
+    int energy_points;
+    int attack_damage;
 
     //Constructeurs
     public :
-
-    Fixed(void);
-    Fixed(Fixed& cpy);
+    
+    ClapTrap(std::string name);
+    ClapTrap(ClapTrap const &cpy);
 
     //Fonctions
     public :
 
-    Fixed &operator=(Fixed &other);
-    int getRawBits(void) const;
-    void setRawBits(int const raw);
+    ClapTrap &operator=(ClapTrap const &other);
+    void attack(const std::string& target);
+    void takeDamage(unsigned int amount);
+    void beRepaired(unsigned int amount);
+    void showStats(void) const;
 
     //Destructeur
     public :
 
-    ~Fixed(void);
+    ~ClapTrap(void);
     
 };
 
