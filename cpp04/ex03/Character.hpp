@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 12:18:27 by lebronen          #+#    #+#             */
-/*   Updated: 2024/03/15 12:20:31 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:29:15 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Character : public ICharacter {
     //Fonctions
     public :
 
-    Character(void);
+    Character(std::string name);
     ~Character();
     
 };

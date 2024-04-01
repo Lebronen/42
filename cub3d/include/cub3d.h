@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+
 typedef struct s_data
 {
 	void	*img;
@@ -22,6 +23,18 @@ typedef struct s_vars
 	void	*win;
 	t_data	*img;
 }			t_vars;
+
+typedef struct s_rays
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+
+}			t_rays;
+
 
 
 
