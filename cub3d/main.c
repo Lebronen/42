@@ -6,7 +6,7 @@
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:58:09 by lebronen          #+#    #+#             */
-/*   Updated: 2024/04/01 13:08:42 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:09:50 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #define screenHeight 1080
 #define mapWidth 24
 #define mapHeight 24
+
+#define abs(x) x >= 0 ? x : -x
 
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -164,7 +166,7 @@ int main() {
     void *mlx_win;
 
 
-  double posX = 20, posY = 15;  //x and y start position
+  double posX = 22, posY = 12;  //x and y start position
   double dirX = -1, dirY = 0; //initial direction vector
   double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
   rays.posX = posX;
