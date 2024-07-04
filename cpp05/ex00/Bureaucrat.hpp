@@ -5,59 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 11:23:05 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/01 12:16:06 by lebronen         ###   ########.fr       */
+/*   Created: 2024/07/04 11:34:06 by lebronen          #+#    #+#             */
+/*   Updated: 2024/07/04 11:34:09 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
-
-#include <iostream>
+# include <string>
+# include <iostream>
+# include <stdexcept>
 
 class Bureaucrat {
-    
-    // attributs
-    private : std::string _name;
-    private : int _grade;
+	private:
+		static const int highestGrade = 1;
+		static const int lowestGrade = 150;
+	
+		const std::string _name;
+		int _grade;
 
-    // constructeurs
-    public :
+	public:
+		Bureaucrat();
+		Bureaucrat(std::string name, int grade);
+		Bureaucrat(const Bureaucrat& bureaucrat);
+		Bureaucrat& operator=(const Bureaucrat& bureaucrat);
+		~Bureaucrat();
 
-    Bureaucrat(void);
-    Bureaucrat(Bureaucrat const &cpy);
-    Bureaucrat(std::string name, int grade);
+		std::string getName() const;
+		int getGrade() const;
 
-    // fonctions
-    public :
+		void incrementGrade();
+		void decrementGrade();
 
-    std::string getName(void) const;
-    int getGrade(void) const;
-    Bureaucrat &operator=(Bureaucrat const & ref);
-    void incrementGrade(void);
-    void decrementGrade(void);
+		class GradeTooHighException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 
-    // exceptions
-    class Exception : public std::exception {
-		public:
-		virtual const char* what() const throw();
-	};
-
-    class GradeTooLowException : public Bureaucrat::Exception {
-        public:
-        virtual const char* what() const throw();
-    };
-    
-    class GradeTooHighException : public Bureaucrat::Exception {
-        public:
-        virtual const char* what() const throw();
-    };
-    
-    // destructeur
-    ~Bureaucrat(void);
-
+		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 };
 
-std::ostream &operator<<( std::ostream & o, Bureaucrat const & rhs);
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
 #endif

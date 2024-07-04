@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 11:33:56 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/04 11:33:59 by lebronen         ###   ########.fr       */
+/*   Created: 2024/07/04 11:41:48 by lebronen          #+#    #+#             */
+/*   Updated: 2024/07/04 11:41:51 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(Bureaucrat::lowestGrade) {}
@@ -39,6 +39,32 @@ Bureaucrat::~Bureaucrat() {}
 
 std::string Bureaucrat::getName() const { return _name; }
 int Bureaucrat::getGrade() const { return _grade; }
+
+void Bureaucrat::signForm(AForm& form) {
+	try
+	{
+		form.beSigned(*this);
+		std::cout << _name << " signed " << form.getName() << "." << std::endl;
+	}
+	catch (const AForm::GradeTooLowException& e)
+	{
+		std::cout << _name << " couldn't sign " << form.getName()
+				  << " because their grade is too low." << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm(AForm const & form) {
+	try
+	{
+		form.execute(*this);
+		std::cout << _name << " executed " << form.getName() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	
+}
 
 void Bureaucrat::incrementGrade() {
 	if (_grade == Bureaucrat::highestGrade)

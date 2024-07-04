@@ -5,40 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 11:34:28 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/04 11:34:30 by lebronen         ###   ########.fr       */
+/*   Created: 2024/07/04 11:50:22 by lebronen          #+#    #+#             */
+/*   Updated: 2024/07/04 11:50:24 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string>
+#include <iostream>
+#include "AForm.hpp"
+#include "Intern.hpp"
 #include "Bureaucrat.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main() {
-	try {
-		Bureaucrat b1("Fabrice", 1);
-		std::cout << b1;
-		b1.incrementGrade();
-	} catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
+	Bureaucrat samuel("Samuel", 1);
+	Intern vincent;
+	AForm* form;
+
+	form = vincent.makeForm("robotomy request", "Bender");
+	form->beSigned(samuel);
+	form->execute(samuel);
+	delete form;
 
 	try {
-		Bureaucrat b2;
-		std::cout << b2;
-		b2.decrementGrade();
+		form = vincent.makeForm("burger king", "Steve");
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-
-	try {
-		Bureaucrat b3("Damien", 160);
-	} catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
-
-	try {
-		Bureaucrat b4("Emile", -5);
-	} catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
-	return 0;
 }

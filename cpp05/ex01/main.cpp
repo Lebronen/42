@@ -5,36 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 11:44:22 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/01 16:28:36 by lebronen         ###   ########.fr       */
+/*   Created: 2024/07/04 11:37:04 by lebronen          #+#    #+#             */
+/*   Updated: 2024/07/04 11:37:05 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-int main(void) {
+int main() {
+	Bureaucrat eric("Eric", 1);
+	Bureaucrat homer("Homer", 42);
+	Bureaucrat franklin("Franklin", 150);
 
-    // default form
-    Form def;
-    std::cout << def << std::endl;
-    Bureaucrat bof;
-    def.be_signed(bof);
-    std::cout << "------------------------------------------" << std::endl;
+	Form goToRestaurant("GoToRestaurant", 1, 1);
+	Form playPingPong("PlayPingPong", 140, 140);
 
-    // grade too low to sign
-    Form high("A38", 42, 21);
-    try {
-        high.be_signed(bof);
-    }
-    catch (Form::Exception &e) {
-       std::cout << "Constructor failure: " << e.what() << std::endl;
-    }
-    std::cout << "------------------------------------------" << std::endl;
-    //grade too low to execute
-    Bureaucrat canSign("I_can_sign", 30);
-    high.be_signed(canSign);
-    std::cout << "------------------------------------------" << std::endl;
-    // destruction
+	try {
+		Form gerard("Gerard", 0, 30);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 
-    std::cout << "DESTRUCTION" << std::endl;
+	std::cout << std::endl;
+
+	eric.signForm(goToRestaurant);
+	homer.signForm(goToRestaurant);
+	franklin.signForm(goToRestaurant);
+	franklin.signForm(playPingPong);
+
+	std::cout << std::endl;
+
+	goToRestaurant.beSigned(eric);
+	playPingPong.beSigned(eric);
+	
+	try {
+		goToRestaurant.beSigned(homer);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	playPingPong.beSigned(homer);
+
+	try {
+		goToRestaurant.beSigned(franklin);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	try {
+		playPingPong.beSigned(franklin);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }

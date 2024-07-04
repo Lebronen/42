@@ -1,6 +1,6 @@
 # Variables
 
-NAME		= Bureaucrat
+NAME		= Intern
 INCLUDE		= .
 SRC_DIR		= ./
 OBJ_DIR		= objects/
@@ -28,7 +28,7 @@ WHITE		=	\033[0;97m
 
 # Sources
 
-SRC_FILES	=	main Bureaucrat
+SRC_FILES	=	main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm PresidentialPardonForm Intern
 
 
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))

@@ -1,40 +1,66 @@
-# ------------------------------------- VARS ----------------------------------
+# Variables
 
-NAME		=	ex01
+NAME		= Form
+INCLUDE		= .
+SRC_DIR		= ./
+OBJ_DIR		= objects/
+CC			= c++
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
+RM			= rm -f
+SMAKE		= make --no-print-directory
 
-SRC			=	main.cpp \
-				Bureaucrat.cpp \
-				Form.cpp
+# Colors
 
-OBJS		=	$(SRC:.cpp=.o)
+END			=	\033[0m
+BOLD		=	\033[1m
+UNDER		=	\033[4m
+REV			=	\033[7m
+DEF_COLOR	=	\033[0;39m
+GRAY		=	\033[0;90m
+RED			=	\033[0;91m
+LIGHT_RED	=	\033[0;31m
+GREEN		=	\033[0;92m
+YELLOW		=	\033[0;93m
+BLUE		=	\033[0;94m
+MAGENTA		=	\033[0;95m
+CYAN		=	\033[0;96m
+WHITE		=	\033[0;97m
 
-COMPILE		=	clang++
+# Sources
 
-# -std=c++98 displays an error if an unauthorized function is left in the code
-FLAGS		=	-Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-shadow
+SRC_FILES	=	main Bureaucrat Form
 
-EXE_NAME	=	-o $(NAME)
 
-EXEC		=	$(NAME)
+SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))
+OBJ			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-# ------------------------------------- RULES ---------------------------------
-all: $(NAME)
+###
 
-$(NAME): $(OBJS)
-	$(COMPILE) $(FLAGS) $(OBJS) $(EXE_NAME)
+OBJF		=	.cache_exists
 
-run: $(NAME)
-	./$(NAME)
+all:		$(NAME)
+
+bonus:		all
+
+$(NAME):	$(OBJ)
+			@$(CC) $(OBJ) -o $@
+			@echo "$(GREEN)$(BOLD)$(NAME) compiled!$(DEF_COLOR)"
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp | $(OBJF)
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -rf $(OBJS)
+			@$(RM) -r $(OBJ_DIR)
+			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
 
-fclean: clean
-	rm -rf $(EXEC)
-	
-re:	fclean all
+fclean:		clean
+			@$(RM) $(NAME)
+			@echo "$(CYAN)$(NAME) executable files cleaned!$(DEF_COLOR)"
 
-.cpp.o:
-	${COMPILE} ${FLAGS} -c $< -o ${<:.cpp=.o}
+re:			fclean all
 
-.PHONY:	all clean fclean re run
+.PHONY:		all clean fclean re
