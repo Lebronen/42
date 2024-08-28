@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:37:35 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/04 11:37:38 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:32:22 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void Form::beSigned(const Bureaucrat& bureaucrat) {
 				  << " because it is already signed." << std::endl;
 	else {
 		_isSigned = true;
+		std::cout << _name << " was signed by " << bureaucrat.getName() << std::endl;
 	}
 }
 

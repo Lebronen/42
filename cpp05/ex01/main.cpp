@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:37:04 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/04 11:37:05 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:30:46 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main() {
 
 	goToRestaurant.beSigned(eric);
 	playPingPong.beSigned(eric);
-	
+
 	try {
 		goToRestaurant.beSigned(homer);
 	} catch (std::exception& e) {

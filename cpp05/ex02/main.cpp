@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:46:54 by lebronen          #+#    #+#             */
-/*   Updated: 2024/07/04 11:46:57 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:43:52 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main() {
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-	
+
 	std::cout << "======String / Copy Constructor test=======" << std::endl;
 
 	try {
