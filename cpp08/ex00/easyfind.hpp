@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:40:20 by rshay             #+#    #+#             */
-/*   Updated: 2024/08/29 18:25:43 by rshay            ###   ########.fr       */
+/*   Updated: 2024/08/30 18:35:49 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 template <typename T>
 int easyfind(T &container, int x)
 {
+	typename T::iterator it;
 	int c = -1;
-	for (int i : container) {
+	for (it = container.begin(); it != container.end(); it++) {
 		c++;
-		if (i == x)
+		if (*it == x)
 			return (c);
 	}
 	return (-1);
