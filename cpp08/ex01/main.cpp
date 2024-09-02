@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 14:47:07 by lebronen          #+#    #+#             */
-/*   Updated: 2024/08/31 21:12:37 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:20:55 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+#include <vector>
 
 int main() {
     Span sp(5);
@@ -39,6 +40,12 @@ int main() {
     {
         std::cerr << e.what() << '\n';
     }
-    
-    
+    Span enorme(10000);
+    std::vector<int> vec;
+    for (int i = 0; i < 10000; i++) {
+        vec.push_back(i);
+    }
+    enorme.addRange(vec.begin(), vec.end());
+    std::cout << enorme.shortestSpan() << std::endl;
+    std::cout << enorme.longestSpan() << std::endl;
 }

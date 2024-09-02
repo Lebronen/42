@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 13:53:36 by lebronen          #+#    #+#             */
-/*   Updated: 2024/08/31 21:10:05 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:08:35 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int max(std::list<int> l) {
 }
 
 int Span::longestSpan() {
-    if (_numbers.size() <= 1) 
+    if (_numbers.size() <= 1)
         throw Span::SpanEmptyException();
     else
         return max(_numbers) - min(_numbers);
@@ -86,13 +86,14 @@ int Span::shortestSpan() {
     else {
         std::list<int>::iterator it1;
         std::list<int>::iterator it2;
+        std::list<int>::iterator temp;
         std::list<int>::iterator diff = _numbers.begin();
         diff++;
         int petit = abs(*_numbers.begin() - *diff);
         for (it1 = _numbers.begin(); it1 != _numbers.end(); it1++) {
-            it2 = it1;
-            it2++;
-            for (it2 = it2; it2 != _numbers.end(); it2++) {
+            temp = it1;
+            temp++;
+            for (it2 = temp; it2 != _numbers.end(); it2++) {
                 if (abs(*it1 - *it2) < petit)
                     petit = abs(*it1 - *it2);
             }

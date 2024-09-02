@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 13:53:39 by lebronen          #+#    #+#             */
-/*   Updated: 2024/08/31 21:10:47 by lebronen         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:18:42 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ public:
     void addNumber(int x);
     int shortestSpan();
     int longestSpan();
+
+    template <typename T>
+    void addRange(T deb, T fin) {
+        for (T it = deb; it != fin; it++) {
+            addNumber(*it);
+        }
+    }
 
     // Exceptions
     class SpanFullException: public std::exception {
