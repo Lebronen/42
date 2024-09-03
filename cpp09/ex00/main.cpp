@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:02:07 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/03 14:08:16 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:33:45 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ int main(int argc, char const *argv[])
 		return 2;
 	}
 	std::string datafile = "./data.csv";
-	BitcoinExchange btc(datafile.c_str());
+	try
+	{
+		BitcoinExchange btc(datafile.c_str());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return 3;
+	}
+	
+
 
 }

@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:01:33 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/03 15:12:00 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:32:55 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
 
 BitcoinExchange::BitcoinExchange(const char *infile)
 {
+	std::cout << "\e[0;33mFile Constructor called of BitcoinExchange\e[0m" << std::endl;
 	std::ifstream data(infile);
 	if (!data || data.bad() || !data.is_open())
 	{
@@ -38,10 +39,9 @@ BitcoinExchange::BitcoinExchange(const char *infile)
 		//std::cout << line << std::endl;
 		std::string sdate = line.substr(0, line.find(","));
 		std::string svaleur = line.substr(line.find(",") + 1, line.length());
-		const struct tm date = stringToDate(sdate);
+		time_t date = stringToDate(sdate);
 		double valeur = atof(svaleur.c_str());
 		dic[date] = valeur;
-
 	}
 }
 
@@ -52,20 +52,20 @@ BitcoinExchange::~BitcoinExchange()
 }
 
 // Functions
-struct tm BitcoinExchange::stringToDate(std::string sdate)
+time_t BitcoinExchange::stringToDate(std::string sdate)
 {
 	char delimiter;
 	std::istringstream is(sdate);
 	int d, m, y;
 	is >> y >> delimiter >> m >> delimiter >> d;
-	struct tm date = {0};
+	struct tm date;
+	memset(&date, 0, sizeof(struct tm));
 	date.tm_mday = d;
 	date.tm_mon = m - 1;
 	date.tm_year = y - 1900;
 	date.tm_isdst = -1;
 	time_t when = mktime(&date);
-	struct tm *norm = localtime(&when);
-	return (*norm);
+	return (when);
 }
 
 // Operators

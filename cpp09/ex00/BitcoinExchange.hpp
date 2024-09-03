@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:01:42 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/03 15:10:46 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:34:11 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <map>
 #include <stdbool.h>
 #include <math.h>
+#include <cstring>
 
 class BitcoinExchange
 {
@@ -34,12 +35,10 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		// Functions
-		float valueAtDate(struct tm date);
-		bool compareDate(struct tm date1, struct tm date2);
-		struct tm stringToDate(std::string sdate);
+		time_t stringToDate(std::string sdate);
 
 		// Attributes
-		std::map<struct tm, double> dic;
+		std::map<time_t, double> dic;
 
 		// Operators
 		BitcoinExchange & operator=(const BitcoinExchange &assign);
