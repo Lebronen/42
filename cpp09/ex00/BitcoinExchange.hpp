@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:01:42 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/03 15:34:11 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:23:13 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class BitcoinExchange
 
 		// Functions
 		time_t stringToDate(std::string sdate);
+		float valueAtDate(time_t date);
 
 		// Attributes
 		std::map<time_t, double> dic;

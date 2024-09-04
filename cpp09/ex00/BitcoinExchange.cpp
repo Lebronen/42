@@ -6,7 +6,7 @@
 /*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:01:33 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/03 15:32:55 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:42:10 by rshay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,22 @@ time_t BitcoinExchange::stringToDate(std::string sdate)
 	date.tm_isdst = -1;
 	time_t when = mktime(&date);
 	return (when);
+}
+
+float BitcoinExchange::valueAtDate(time_t date)
+{
+	std::map<time_t,double>::iterator it;
+	time_t min = date;
+	time_t emin = date;
+	for (it = dic.begin(); it != dic.end(); it++) {
+		if (date - it->first >= 0) {
+			if (date - it->first < min) {
+				min = date - it->first;
+				emin = it->first;
+			}
+		}
+	}
+	return dic[emin];
 }
 
 // Operators
