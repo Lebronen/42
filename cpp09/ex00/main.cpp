@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:02:07 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/04 16:47:02 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/05 10:02:16 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,22 @@ bool formatDateValide(std::string sdate)
 		return false;
 	for (int i = 0; i < 4; i++) {
 		if (sdate[i] < 48 || sdate[i] > 57) {
-			//std::cerr << "error 1" << std::endl;
 			return false;
 		}
 	}
 	if (sdate[4] != '-') {
-		//std::cerr << "error 2" << std::endl;
 		return false;
 	}
 	for (int i = 5; i < 7; i++) {
 		if (sdate[i] < 48 || sdate[i] > 57) {
-			//std::cerr << "error 3" << std::endl;
 			return false;
 		}
 	}
 	if (sdate[7] != '-') {
-		//std::cerr << "error 4" << std::endl;
 		return false;
 	}
 	for (int i = 8; i < 10; i++) {
 		if (sdate[i] < 48 || sdate[i] > 57) {
-			//std::cerr << "error 5" << std::endl;
 			return false;
 		}
 	}
@@ -89,7 +84,6 @@ int main(int argc, char const *argv[])
 				}
 				else
 				{
-					//std::cout << line << std::endl;
 					time_t date = btc.stringToDate(sdate);
 					float price = btc.valueAtDate(date);
 					std::cout << sdate << " => " << price * valeur << std::endl;

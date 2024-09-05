@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RPN.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/05 14:29:42 by lebronen          #+#    #+#             */
+/*   Updated: 2024/09/05 14:29:43 by lebronen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "RPN.hpp"
 
 // Constructors
@@ -48,7 +60,7 @@ RPN::RPN(std::string expr)
 						pile.pop();
 						int y = pile.top();
 						pile.pop();
-						int res = x - y;
+						int res = y - x;
 						pile.push(res);
 					}
 					else if (expr[i] == '/') {
@@ -56,13 +68,12 @@ RPN::RPN(std::string expr)
 						pile.pop();
 						int y = pile.top();
 						pile.pop();
-						int res = x / y;
+						int res = y / x;
 						pile.push(res);
 					}
 				}
 			}
 		}
-		std::cout << pile.top() << std::endl;
 	}
 	if (pile.size() > 1)
 		throw RPN::NotEnoughOperationsException();

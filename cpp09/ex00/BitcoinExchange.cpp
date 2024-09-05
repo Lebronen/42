@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rshay <rshay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lebronen <lebronen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:01:33 by rshay             #+#    #+#             */
-/*   Updated: 2024/09/04 16:42:10 by rshay            ###   ########.fr       */
+/*   Updated: 2024/09/05 10:02:28 by lebronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ BitcoinExchange::BitcoinExchange(const char *infile)
 	std::string line;
 
 	while (std::getline(data, line)) {
-		//std::cout << line << std::endl;
 		std::string sdate = line.substr(0, line.find(","));
 		std::string svaleur = line.substr(line.find(",") + 1, line.length());
 		time_t date = stringToDate(sdate);
